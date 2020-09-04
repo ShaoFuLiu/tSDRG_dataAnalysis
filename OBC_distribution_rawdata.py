@@ -9,9 +9,10 @@ import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 
 BC = 'OBC'
-Ls = [32, 48, 64, 96, 128, 256]
+#Ls = [32, 48, 64, 96, 128, 256]
+Ls = [32]
 Jdis = ['Jdis10']
-N = 200  #arr = ['1','2','3','4','5'...]
+N = 10000  #arr = ['1','2','3','4','5'...]
 m = 30
 
 for j in range(len(Jdis)):

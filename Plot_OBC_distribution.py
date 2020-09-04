@@ -9,25 +9,26 @@ import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 
 BC = 'OBC'
-Ls = [32, 48, 64, 96, 128, 256]
+#Ls = [32, 48, 64, 96, 128, 256]
+Ls = [32]
 Jdis = 'Jdis10'
-N = 200
+N = 10000
 
 for i in range(len(Ls)):
-    myfile = '/home/liusf/test/Distribution_end_to_end_correlation/L' + str(Ls[i]) + '_P10_m30_Jdis10_sum200_corr1.csv'
+    myfile = '/home/liusf/test/Distribution_end_to_end_correlation/L' + str(Ls[i]) + '_P10_m30_Jdis10_sum'+ str(N) +'_corr1.csv'
     df = pd.read_csv(myfile)
 
-    left = -1
-    right = 0.5
-    n = 1.5
+    up = -1
+    down = 0.2
+    n = 1.2
     df2 = pd.DataFrame(columns = ['mid', 'lnP'])
 
-    for j in range(6):
+    for j in range(15):
         #print((left+right)/2)
-        mid = (left+right)/2 
-        selected = df[df['corr'].between(left,right)]['corr']
-        left += n
-        right += n
+        mid = (up+down)/2 
+        selected = df[df['corr'].between(up,down)]['corr']
+        up += n
+        down += n
         print(len(selected)/10000)
         lnP = math.log(len(selected)/10000)
         mean = {'mid':mid ,'lnP':lnP}  
