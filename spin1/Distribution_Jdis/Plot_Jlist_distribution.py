@@ -19,10 +19,7 @@ for i in range(len(Dimer)):
     n = 0.05
     df1 = pd.DataFrame(columns = ['mid', 'Prob'])
     df2 = pd.DataFrame(columns = ['mid', 'Prob'])
-    """
-    plt.plot(np.array(df['J2']), 'o', markersize = 8)
-    print(np.array(df['J2']))
-    """
+
     for j in range(40):
         #selected1 = df[df['J'].between(up,down)]['J']
         selected2 = df[df['J2'].between(up,down)]['J2']
@@ -36,9 +33,9 @@ for i in range(len(Dimer)):
         #df1.loc[j] = mean1
         df2.loc[j] = mean2
 #   plt.plot(df1['mid'], df1['Prob'], 'o-', markersize = 8)
-#   plt.plot(df2['mid'], df2['Prob'], 'o-', markersize = 8, label = 'Dimer = %s' %(Dimer[i]))
-df['J2'].hist()
-"""
+    plt.plot(df2['mid'], df2['Prob'], 'o-', markersize = 8, label = 'Dimer = %s' %(Dimer[i]))
+#df['J2'].hist()
+
 plt.xlabel('$J$', fontsize=14)
 plt.ylabel('$P(J)$', fontsize=14)
 plt.title(Jdis + 'D1toD5_power-law_distribution', fontsize=12)
@@ -49,4 +46,3 @@ plt.grid()
 #plt.savefig('/home/liusf/test/spin1/Distribution_Jdis/'+ Jdis + Dimer +'_power-law_distribution.pdf', format='pdf', dpi=4000)
 plt.savefig('/home/liusf/test/spin1/Distribution_Jdis/D1toD5_distribution.pdf', format='pdf', dpi=4000)
 plt.show()
-"""
