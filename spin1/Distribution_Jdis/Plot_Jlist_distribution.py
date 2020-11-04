@@ -21,19 +21,19 @@ for i in range(len(Dimer)):
     df2 = pd.DataFrame(columns = ['mid', 'Prob'])
 
     for j in range(40):
-        #selected1 = df[df['J'].between(up,down)]['J']
-        selected2 = df[df['J2'].between(up,down)]['J2']
+        selected1 = df[df['J'].between(up,down)]['J']
+        #selected2 = df[df['J2'].between(up,down)]['J2']
         mid = (up+down)/2 
         up += n
         down += n
-        #Prob1 = len(selected1)/L
-        Prob2 = len(selected2)/L
-        #mean1 = {'mid':mid ,'Prob':Prob1}
-        mean2 = {'mid':mid ,'Prob':Prob2}
-        #df1.loc[j] = mean1
-        df2.loc[j] = mean2
-#   plt.plot(df1['mid'], df1['Prob'], 'o-', markersize = 8)
-    plt.plot(df2['mid'], df2['Prob'], 'o-', markersize = 8, label = 'Dimer = %s' %(Dimer[i]))
+        Prob1 = len(selected1)/L
+        #Prob2 = len(selected2)/L
+        mean1 = {'mid':mid ,'Prob':Prob1}
+        #mean2 = {'mid':mid ,'Prob':Prob2}
+        df1.loc[j] = mean1
+        #df2.loc[j] = mean2
+    plt.plot(df1['mid'], df1['Prob'], 'o-', markersize = 8, label = 'Dimer = %s' %(Dimer[i]))
+#    plt.plot(df2['mid'], df2['Prob'], 'o-', markersize = 8, label = 'Dimer = %s' %(Dimer[i]))
 #df['J2'].hist()
 
 plt.xlabel('$J$', fontsize=14)
