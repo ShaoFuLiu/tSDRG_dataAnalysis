@@ -22,10 +22,10 @@ for i in range(N):
     arr.append(n)
 
 for j in range(len(Jdis)):
-    J = Jdis[j]
+    jdis = Jdis[j]
 
     for l in range(len(Ls)):
-        L = Ls[l]
+        L = Ls[l]                
 
         for d in range(len(Dimer)):
             dimer = Dimer[d]
@@ -33,7 +33,7 @@ for j in range(len(Jdis)):
             for i in range(len(arr)):
                 num = arr[i] 
                 ## Source ##
-                myfile = '/home/liusf/tSDRG/MainDim/data2/'+ BC +'/'+ J +'/'+ dimer +'/L'+ str(L) +'_P'+ str(P) +'_m30_'+ num + '/L'+ str(L) +'_P' + str(P) + '_m30_'+ num +'_string.csv'
+                myfile = '/home/liusf/tSDRG/MainDim/data2/'+ BC +'/'+ jdis +'/'+ dimer +'/L'+ str(L) +'_P'+ str(P) +'_m30_'+ num + '/L'+ str(L) +'_P' + str(P) + '_m30_'+ num +'_string.csv'
                 df = pd.read_csv(myfile)  
                 dfr = df['x2'] - df['x1']
                 DataColle = {'x2-x1': dfr}
@@ -49,7 +49,7 @@ for j in range(len(Jdis)):
             dfavc = dftc/N
             dfavc = pd.concat([dfR,dfavc],axis=1)
 
-            direc = '/home/liusf/test/Sorting_data/metadata/SOP/'+ J 
+            direc = '/home/liusf/test/Sorting_data/metadata/SOP/'+ jdis
             if (os.path.exists(direc) == False):
                 os.mkdir(direc)
             direc2 = direc + '/' + dimer 
