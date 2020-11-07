@@ -9,11 +9,26 @@ import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 
 BC = 'PBC'
-Ls = [32, 64]
-Jdis = ['Jdis01','Jdis05','Jdis10']
-Dimer = ['Dim01','Dim02','Dim03','Dim04','Dim05','Dim06','Dim07','Dim08','Dim09','Dim10']
-P = 10
-N = 100
+Ls = [32]
+Jdis = ['Jdis01','Jdis05']
+
+init_D = 10
+final_D = 30
+space = 2
+file_num = int ((final_D - init_D)/space+1)
+Dimer = []
+for i in range(file_num):
+    D = init_D + space*i
+    d = '0'+ str(D)[0] + str(D)[1]
+    Dimer.append('Dim' + d)
+init_D2 = 40
+for i in range(11):
+    D = init_D2 + space*i
+    d = '0'+ str(D)[0] + str(D)[1]
+    Dimer.append('Dim' + d)
+
+P = 20
+N = 1000
 init_seed = 1
 
 arr = []
@@ -31,11 +46,11 @@ for i in range(len(Ls)):
 
         for d in range(len(Dimer)):
             dimer = Dimer[d]
-            D = float(Dimer[d][3] + '.' + Dimer[d][4])
+            D = float(Dimer[d][3] + '.' + Dimer[d][4] + Dimer[d][5])
             
             for k in range(len(arr)):
                 num = arr[k] 
-                myfile = '/home/liusf/tSDRG/MainDim/data2/'+ BC +'/'+ jdis + '/'+ dimer + '/L'+ str(L) +'_P10_m30_'+ num + '/L'+ str(L) +'_P10_m30_'+ num +'_string.csv'
+                myfile = '/home/liusf/tSDRG/MainDim/data2/'+ BC +'/'+ jdis + '/'+ dimer + '/L'+ str(L) +'_P'+ str(P) +'_m30_'+ num + '/L'+ str(L) +'_P'+ str(P) +'_m30_'+ num +'_string.csv'
                 df = pd.read_csv(myfile)  
                 if(k == 0):
                     dftc = df['corr']

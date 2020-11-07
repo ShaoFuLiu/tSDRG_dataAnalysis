@@ -35,8 +35,8 @@ for i in range(len(Ls)):
             
             for k in range(len(arr)):
                 num = arr[k] 
-                #myfile = '/home/liusf/tSDRG/MainDim/data2/'+ BC +'/'+ jdis + '/'+ dimer + '/L'+ str(L) +'_P10_m30_'+ num + '/ZL.csv'
-                myfile = '/home/liusf/tSDRG/testfunction/data2/'+ BC +'/'+ jdis + '/'+ dimer + '/L'+ str(L) +'_P10_m30_'+ num + '/ZL.csv'
+                #myfile = '/home/liusf/tSDRG/MainDim/data2/'+ BC +'/'+ jdis + '/'+ dimer + '/L'+ str(L) +'_P'+ str(P) +'_m30_'+ num + '/ZL.csv'
+                myfile = '/home/liusf/tSDRG/testfunction/data2/'+ BC +'/'+ jdis + '/'+ dimer + '/L'+ str(L) +'_P'+ str(P) +'_m30_'+ num + '/ZL.csv'
                 df = pd.read_csv(myfile)  
                 if(k == 0):
                     dftc = df['ZL']
