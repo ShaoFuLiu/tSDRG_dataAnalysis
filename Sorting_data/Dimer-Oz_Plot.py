@@ -12,7 +12,7 @@ Ls = [32]
 Jdis = ['Jdis01','Jdis05']
 
 init_D = 10
-final_D = 30
+final_D = 60
 space = 2
 file_num = int ((final_D - init_D)/space+1)
 Dimer = []
@@ -20,11 +20,11 @@ for i in range(file_num):
     D = init_D + space*i
     d = '0'+ str(D)[0] + str(D)[1]
     Dimer.append('Dim' + d)
-init_D2 = 40
-for i in range(11):
-    D = init_D2 + space*i
-    d = '0'+ str(D)[0] + str(D)[1]
-    Dimer.append('Dim' + d)
+#init_D2 = 40
+#for i in range(11):
+#    D = init_D2 + space*i
+#    d = '0'+ str(D)[0] + str(D)[1]
+#    Dimer.append('Dim' + d)
 
 P = 20
 N = 1000
@@ -43,7 +43,7 @@ for i in range(len(Ls)):
         jdis = Jdis[j]
         J = float(Jdis[j][4] + '.' + Jdis[j][5])
 
-        myfile = './metadata/SOP/'+ jdis + '/Dimer-Oz/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m30_dim-sop_AV'+ str(N) +'.csv'
+        myfile = '/home/liusf/test/Sorting_data/metadata/SOP/'+ jdis + '/Dimer-Oz/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m30_dim-sop_AV'+ str(N) +'.csv'
         df = pd.read_csv(myfile)
         plt.plot(df['Dimerization'] ,df['O^z'],"o-", markersize = 8, label = 'L=%d, $\delta$ = %s ' %(L, J))
 
