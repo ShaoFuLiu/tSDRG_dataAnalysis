@@ -10,7 +10,7 @@ from scipy.optimize import curve_fit
 
 BC = 'PBC'
 Ls = [32]
-Jdis = ['Jdis01','Jdis05']
+Jdis = ['Jdis01','Jdis05','Jdis10']
 
 init_D = 10
 final_D = 30
@@ -27,7 +27,7 @@ for i in range(11):
     d = '0'+ str(D)[0] + str(D)[1]
     Dimer.append('Dim' + d)
 
-P = 20
+P = 10
 N = 1000
 init_seed = 1
 

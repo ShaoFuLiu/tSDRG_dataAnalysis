@@ -7,19 +7,14 @@ import numpy as np
 import matplotlib.pyplot as plt 
 from scipy.optimize import curve_fit
 
-spin = 0.5
+spin = 1.0
 BC = 'PBC'
 P = 10
-Ls = [32]
-Jdis = ['Jdis05']
+Ls = [32,64,128]
+Jdis = ['Jdis00']
 Dimer = ['Dim01','Dim02','Dim03','Dim04','Dim05','Dim06','Dim07','Dim08','Dim09','Dim10']
-N = 10  
+N = 1
 init_seed = 1
-
-arr = []
-for j in range(N):
-    n = str(init_seed+1)
-    arr.append(n)
 
 for i in range(len(Ls)):
     L = Ls[i]
@@ -39,7 +34,7 @@ plt.ylabel(r'$Z(L)$', fontsize=12)
 #plt.ylim(-1, 1)
 #plt.xscale('log')
 #plt.yscale('log')
-plt.title(r'Dimerization vs $Z(L)$(average %d), spin = %s, $\delta$ = %s, $\chi$ = 30' % (int(N), spin, J), fontsize=12)
+plt.title(r'Dimerization vs $Z(L)$, spin = %s, $\delta$ = %s, $\chi$ = 30' % (spin, J), fontsize=12)
 plt.legend(loc = 'best',fontsize=12)
-plt.savefig( BC + '_' + jdis + '_P'+ str(P) +'_m30_N' + str(N) +'_ZL-Dimerization.pdf', format='pdf', dpi=4000)
+plt.savefig( BC + '_' + jdis + '_P'+ str(P) +'_m30_ZL-Dimerization.pdf', format='pdf', dpi=4000)
 plt.show()

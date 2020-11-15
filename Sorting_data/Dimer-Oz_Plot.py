@@ -30,22 +30,19 @@ P = 20
 N = 1000
 init_seed = 1
 
-arr = []
-for j in range(N):
-    n = str(init_seed+1)
-    arr.append(n)
-
 for i in range(len(Ls)):
     L = Ls[i]
     dfstr = pd.DataFrame(columns = ['Dimerization', 'O^z'])
-    
+    if (L == 64):
+        N = 100
+
     for j in range(len(Jdis)):
         jdis = Jdis[j]
         J = float(Jdis[j][4] + '.' + Jdis[j][5])
 
         myfile = '/home/liusf/test/Sorting_data/metadata/SOP/'+ jdis + '/Dimer-Oz/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m30_dim-sop_AV'+ str(N) +'.csv'
         df = pd.read_csv(myfile)
-        plt.plot(df['Dimerization'] ,df['O^z'],"o-", markersize = 8, label = 'L=%d, $\delta$ = %s ' %(L, J))
+        plt.plot(df['Dimerization'] ,df['O^z'],"o-", markersize = 8, label = 'L=%d, $\delta$ = %s, AVG(%d)' %(L, J, N))
 
 plt.xlabel(r'$Dimerization$', fontsize=14)
 plt.ylabel(r'$O^z(r=L/2)$', fontsize=14)
@@ -53,7 +50,7 @@ plt.ylabel(r'$O^z(r=L/2)$', fontsize=14)
 #plt.ylim(0, 0.4)
 #plt.xscale('log')
 #plt.yscale('log')
-plt.title(r'Dimerization vs $O^z(r=L/2)$(average %d), $\chi$ = 30' % (int(N)), fontsize=12)
+plt.title(r'Dimerization vs $O^z(r=L/2)$, $\chi$ = 30', fontsize=12)
 plt.legend(loc = 'best',fontsize=12)
-plt.savefig( BC + '_P'+ str(P) +'_m30_N' + str(N) +'_Oz-Dimerization.pdf', format='pdf', dpi=4000)
+plt.savefig( BC + '_P'+ str(P) +'_m30_Oz-Dimerization.pdf', format='pdf', dpi=4000)
 plt.show()
