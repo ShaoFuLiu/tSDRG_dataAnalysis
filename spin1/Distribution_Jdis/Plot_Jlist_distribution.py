@@ -9,8 +9,8 @@ import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 
 L = 10000
-Jdis = 'J1'
-Dimer = ['D0', 'D1', 'D2', 'D3', 'D4', 'D5']
+Jdis = 'J0'
+Dimer = ['D0']
 for i in range(len(Dimer)):
     myfile = '/home/liusf/test/spin1/Distribution_Jdis/'+ Jdis + Dimer[i] +'_list.csv'
     df = pd.read_csv(myfile)
@@ -38,11 +38,11 @@ for i in range(len(Dimer)):
 
 plt.xlabel('$J$', fontsize=14)
 plt.ylabel('$P(J)$', fontsize=14)
-plt.title(Jdis + 'D1toD5_power-law_distribution', fontsize=12)
+plt.title(Jdis + 'D0_power-law_distribution', fontsize=12)
 #plt.xlim(0,1)
 #plt.ylim(0,0.1)
 plt.legend(loc = 'best', fontsize=12)
 plt.grid()
 #plt.savefig('/home/liusf/test/spin1/Distribution_Jdis/'+ Jdis + Dimer +'_power-law_distribution.pdf', format='pdf', dpi=4000)
-plt.savefig('/home/liusf/test/spin1/Distribution_Jdis/D1toD5_distribution.pdf', format='pdf', dpi=4000)
+plt.savefig('/home/liusf/test/spin1/Distribution_Jdis/J0D0_distribution.pdf', format='pdf', dpi=4000)
 plt.show()

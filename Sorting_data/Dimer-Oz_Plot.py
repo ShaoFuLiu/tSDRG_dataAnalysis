@@ -8,8 +8,8 @@ import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 
 BC = 'PBC'
-Ls = [32]
-Jdis = ['Jdis01','Jdis05']
+Ls = [32, 64, 128]
+Jdis = ['Jdis01','Jdis05','Jdis10']
 
 init_D = 10
 final_D = 60
@@ -25,18 +25,24 @@ for i in range(file_num):
 #    D = init_D2 + space*i
 #    d = '0'+ str(D)[0] + str(D)[1]
 #    Dimer.append('Dim' + d)
-
-P = 20
 N = 1000
+P = 10
 init_seed = 1
 
 for i in range(len(Ls)):
     L = Ls[i]
-    dfstr = pd.DataFrame(columns = ['Dimerization', 'O^z'])
-    if (L == 64):
-        N = 100
 
+    if (L == 128):
+        N = 100
+        Jdis = ['Jdis01']
+
+    dfstr = pd.DataFrame(columns = ['Dimerization', 'O^z'])
     for j in range(len(Jdis)):
+        if (L == 32):
+            if (j == 0):
+                N = 10000
+            else:
+                N = 1000
         jdis = Jdis[j]
         J = float(Jdis[j][4] + '.' + Jdis[j][5])
 

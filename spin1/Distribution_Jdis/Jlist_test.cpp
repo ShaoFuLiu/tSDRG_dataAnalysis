@@ -32,7 +32,7 @@ double Distribution_Random_Variable(int model, double var, double Jdis)
 
 int main()
 {
-    double Jdis = 0.1; //= delta
+    double Jdis = 0; //= delta
     double dim = 0; //=dimer
     int delta = Jdis * 10;
     int dimer = dim * 10;
