@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 
 BC = 'PBC'
-Ls = [32, 64, 128]
+Ls = [32, 64, 128, 256]
 Jdis = ['Jdis01','Jdis05','Jdis10']
 
 init_D = 10
@@ -20,35 +20,57 @@ for i in range(file_num):
     D = init_D + space*i
     d = '0'+ str(D)[0] + str(D)[1]
     Dimer.append('Dim' + d)
-#init_D2 = 40
-#for i in range(11):
-#    D = init_D2 + space*i
-#    d = '0'+ str(D)[0] + str(D)[1]
-#    Dimer.append('Dim' + d)
-N = 1000
+
+def choose_marker(L):
+    if (L == 32):
+        marker = "o-"
+    elif (L == 64):
+        marker = "x-"
+    elif (L == 128):
+        marker = "v-"
+    elif (L == 256):
+        marker = "*-"
+    return marker
+
+def choose_color(delta):
+    if (delta == 0.1):
+        color = "r"
+    elif (delta == 0.5):
+        color = "g"
+    elif (delta == 1.0):
+        color = "b"
+    elif (delta == 1.5):
+        color = "y"
+    return color
+
 P = 10
 init_seed = 1
 
 for i in range(len(Ls)):
     L = Ls[i]
-
-    if (L == 128):
-        N = 100
-        Jdis = ['Jdis01']
-
     dfstr = pd.DataFrame(columns = ['Dimerization', 'O^z'])
-    for j in range(len(Jdis)):
-        if (L == 32):
-            if (j == 0):
-                N = 10000
-            else:
-                N = 1000
+    
+    if (L == 128 or L == 256):
+            Jdis = ['Jdis01']
+
+    for j in range(len(Jdis)):        
+
+        if (L == 32 and j == 0):
+            N = 10000
+        elif (L == 32 and j != 0):
+            N = 1000
+        elif (L == 64):
+            N = 1000
+        elif (L == 128 or L == 256):
+            N = 100
+        
         jdis = Jdis[j]
         J = float(Jdis[j][4] + '.' + Jdis[j][5])
 
         myfile = '/home/liusf/test/Sorting_data/metadata/SOP/'+ jdis + '/Dimer-Oz/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m30_dim-sop_AV'+ str(N) +'.csv'
         df = pd.read_csv(myfile)
-        plt.plot(df['Dimerization'] ,df['O^z'],"o-", markersize = 8, label = 'L=%d, $\delta$ = %s, AVG(%d)' %(L, J, N))
+        plt.plot(df['Dimerization'] ,df['O^z'],choose_color(J)+choose_marker(L), markersize = 6, label = 'L=%d, $\delta$ = %s, AVG(%d)' %(L, J, N))
+        #plt.errorbar(df['x2-x1'], df['corr'], yerr=df['error']/np.sqrt(df['N']), linestyle='None', color=colors[i%6], capsize=3, capthick=1, label=None)
 
 plt.xlabel(r'$Dimerization$', fontsize=14)
 plt.ylabel(r'$O^z(r=L/2)$', fontsize=14)
