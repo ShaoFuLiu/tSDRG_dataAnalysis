@@ -21,27 +21,35 @@ for i in range(file_num):
     d = '0'+ str(D)[0] + str(D)[1]
     Dimer.append('Dim' + d)
 
-def choose_marker(L):
+def choose_color(L):
     if (L == 32):
-        marker = "o-"
+        color = "r"
+        #marker = "o-"
     elif (L == 64):
-        marker = "x-"
+        color = "g"
+        #marker = "x-"
     elif (L == 128):
-        marker = "v-"
+        color = "b"
+        #marker = "v-"
     elif (L == 256):
+        color = "y"
+        #marker = "*-"
+    return color
+
+def choose_marker(delta):
+    if (delta == 0.1):
+        #color = "r"
+        marker = "o-"
+    elif (delta == 0.5):
+        #color = "g"
+        marker = "x-"
+    elif (delta == 1.0):
+        #color = "b"
+         marker = "v-"
+    elif (delta == 1.5):
+        #color = "y"
         marker = "*-"
     return marker
-
-def choose_color(delta):
-    if (delta == 0.1):
-        color = "r"
-    elif (delta == 0.5):
-        color = "g"
-    elif (delta == 1.0):
-        color = "b"
-    elif (delta == 1.5):
-        color = "y"
-    return color
 
 P = 10
 init_seed = 1
@@ -69,7 +77,7 @@ for i in range(len(Ls)):
 
         myfile = '/home/liusf/test/Sorting_data/metadata/SOP/'+ jdis + '/Dimer-Oz/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m30_dim-sop_AV'+ str(N) +'.csv'
         df = pd.read_csv(myfile)
-        plt.plot(df['Dimerization'] ,df['O^z'],choose_color(J)+choose_marker(L), markersize = 6, label = 'L=%d, $\delta$ = %s, AVG(%d)' %(L, J, N))
+        plt.plot(df['Dimerization'] ,df['O^z'],choose_color(L)+choose_marker(J), markersize = 6, label = 'L=%d, $\delta$ = %s, AVG(%d)' %(L, J, N))
         #plt.errorbar(df['x2-x1'], df['corr'], yerr=df['error']/np.sqrt(df['N']), linestyle='None', color=colors[i%6], capsize=3, capthick=1, label=None)
 
 plt.xlabel(r'$Dimerization$', fontsize=14)
