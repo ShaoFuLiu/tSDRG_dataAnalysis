@@ -20,11 +20,6 @@ for i in range(file_num):
     D = init_D + space*i
     d = '0'+ str(D)[0] + str(D)[1]
     Dimer.append('Dim' + d)
-init_D2 = 40
-for i in range(11):
-    D = init_D2 + space*i
-    d = '0'+ str(D)[0] + str(D)[1]
-    Dimer.append('Dim' + d)
 
 def choose_color(L):
     if (L == 32):

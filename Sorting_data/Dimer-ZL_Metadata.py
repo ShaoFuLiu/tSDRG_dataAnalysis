@@ -11,7 +11,19 @@ from scipy.optimize import curve_fit
 BC = 'PBC'
 Ls = [32,64,128]
 Jdis = ['Jdis00']
-Dimer = ['Dim01','Dim02','Dim03','Dim04','Dim05','Dim06','Dim07','Dim08','Dim09','Dim10']
+
+init_D = 10
+final_D = 98
+space = 2
+file_num = int ((final_D - init_D)/space+1)
+Dimer = ["Dim00"]
+for i in range(file_num):
+    D = init_D + space*i
+    d = '0'+ str(D)[0] + str(D)[1]
+    Dimer.append('Dim' + d)
+Dimer.append('Dim100')
+print(Dimer)
+"""#Dimer = ['Dim01','Dim02','Dim03','Dim04','Dim05','Dim06','Dim07','Dim08','Dim09','Dim10']
 P = 10
 N = 1
 init_seed = 1
@@ -24,20 +36,23 @@ for j in range(N):
 for i in range(len(Ls)):
     L = Ls[i]
     dfstr = pd.DataFrame(columns = ['Dimerization', 'ZL'])
-    
+
     for j in range(len(Jdis)):
         jdis = Jdis[j]
         J = float(Jdis[j][4] + '.' + Jdis[j][5])
 
         for d in range(len(Dimer)):
             dimer = Dimer[d]
-            D = float(Dimer[d][3] + '.' + Dimer[d][4])
-            
+            if(d == 0):
+                D = 0.0
+            if(d != 0):
+                D = float(Dimer[d][3] + '.' + Dimer[d][4] + Dimer[d][5])
+
             for k in range(len(arr)):
-                num = arr[k] 
+                num = arr[k]
                 #myfile = '/home/liusf/tSDRG/MainDim/data2/'+ BC +'/'+ jdis + '/'+ dimer + '/L'+ str(L) +'_P'+ str(P) +'_m30_'+ num + '/ZL.csv'
                 myfile = '/home/liusf/tSDRG/MainDimZL/data2/'+ BC +'/'+ jdis + '/'+ dimer + '/L'+ str(L) +'_P'+ str(P) +'_m30_'+ num + '/ZL.csv'
-                df = pd.read_csv(myfile)  
+                df = pd.read_csv(myfile)
                 if(k == 0):
                     dftc = df['ZL']
                 dfc = df['ZL']
@@ -56,5 +71,5 @@ for i in range(len(Ls)):
         if (os.path.exists(direc2) == False):
             os.mkdir(direc2)
         path = direc2 +'/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m30_dim-zl_AV'+ str(N) +'.csv'
-        dfstr.to_csv(path,index=0)
+        dfstr.to_csv(path,index=0)"""
 print('done')

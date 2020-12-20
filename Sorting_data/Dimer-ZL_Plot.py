@@ -10,9 +10,20 @@ from scipy.optimize import curve_fit
 spin = 1.0
 BC = 'PBC'
 P = 10
-Ls = [32,64,128]
+Ls = [32, 64]
 Jdis = ['Jdis00']
-Dimer = ['Dim01','Dim02','Dim03','Dim04','Dim05','Dim06','Dim07','Dim08','Dim09','Dim10']
+
+init_D = 10
+final_D = 98
+space = 2
+file_num = int ((final_D - init_D)/space+1)
+Dimer = ["Dim00"]
+for i in range(file_num):
+    D = init_D + space*i
+    d = '0'+ str(D)[0] + str(D)[1]
+    Dimer.append('Dim' + d)
+Dimer.append('Dim100')
+
 N = 1
 init_seed = 1
 
@@ -31,7 +42,7 @@ for i in range(len(Ls)):
 plt.xlabel(r'$Dimerization$', fontsize=14)
 plt.ylabel(r'$Z(L)$', fontsize=12)
 #plt.xlim(0.1,1.5)
-#plt.ylim(-1, 1)
+plt.ylim(-1, 1)
 #plt.xscale('log')
 #plt.yscale('log')
 plt.title(r'Dimerization vs $Z(L)$, spin = %s, $\delta$ = %s, $\chi$ = 30' % (spin, J), fontsize=12)
