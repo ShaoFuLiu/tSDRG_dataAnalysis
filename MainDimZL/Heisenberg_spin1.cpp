@@ -241,7 +241,7 @@ void tSDRG_XXZ(int L, int chi, int Pdis, double Jdis, string BC, double S, doubl
         throw runtime_error(err.str());
     }
     fout << "ZL" << endl;
-    fout << setprecision(16) << Correlation_ZL2(w_up, w_down, w_loc) << endl;
+    fout << setprecision(16) << Correlation_ZL(w_up, w_down, w_loc) << endl;
     
     fout.flush();
     fout.close();
