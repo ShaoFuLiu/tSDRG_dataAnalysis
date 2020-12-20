@@ -25,6 +25,8 @@ int main()
 
     /// create coupling list and MPO chain for OBC or PBC
     vector<double> J_list;
+    vector<vector<uni10_double64>> V;
+    
     for(int i=0; i<3; i++)
     {
         double jvar = Dist_J(genFixed);
@@ -56,7 +58,7 @@ int main()
     H12.Launch(H);
     //cout << "H = " << H << endl;
 
-    cout << MPO_chain[0].GetTensor('l') << endl;cout << H3 << endl;
+    //cout << MPO_chain[0].GetTensor('l') << endl;cout << H3 << endl;
 
     /// diagonal local hamitonian
     uni10::Matrix<double> M, En, En2;                               // eigen energy
@@ -65,18 +67,28 @@ int main()
     H_block = H.GetBlock() + H_last.GetBlock();
     uni10::EigH(H_block, En, state, uni10::INPLACE);
     //cout << H_block << endl;cout << En << endl;
+    V = {{2,0,4},{0,2,0},{4,0,2}};
+    uni10_double64 mat_elem[] = {\
+    2.0, 0.0, 4.0,\
+    0.0, 2.0, 0.0,\
+    4.0, 0.0, 2.0};
+    uni10_double64 mat_elem2[9];
+    for(int i=0;i<3;i++)
+    {
+        for(int j=0;j<3;j++)
+            mat_elem2[i*3+j] = V[j][i];
+    }
+    //cout << mat_elem2[0] << V[0][0] << endl;
 
-    /*uni10_double64 mat_elem[] = {\
-    2.0, 1.0,\
-    1.0, 2.0};
-    M = uni10::Matrix<uni10_double64>(2, 2, mat_elem);
+    M = uni10::Matrix<uni10_double64>(3, 3, mat_elem2);
     uni10::EigH(M, En2, state2, uni10::INPLACE);
-    cout << M << endl;cout << En2 << endl;cout << state2 << endl;*/
+    cout << M << endl;cout << En2 << endl;cout << state2 << endl;
 
     /// Define the energy gap in the spectrum and truncation system
     int chi_loc = H.GetBlock().col();
     bool info = 1;  
-    Truncation(En, state, 9, chi_loc, info); 
-    //cout << "state = "<< state << endl;
+    Truncation(En2, state2, 1, chi_loc, info); 
+    cout << "En2 = " << En2 << endl; 
+    cout << "state = "<< state2 << endl;
     return 0;
 }
