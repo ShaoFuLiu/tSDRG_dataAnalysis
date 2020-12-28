@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 
 BC = 'PBC'
-Ls = [32, 64, 128, 256]
+Ls = [32,64,128,256]
 Jdis = ['Jdis01','Jdis05','Jdis10']
 
 init_D = 10
@@ -56,29 +56,45 @@ init_seed = 1
 
 for i in range(len(Ls)):
     L = Ls[i]
+    print(L)
     dfstr = pd.DataFrame(columns = ['Dimerization', 'O^z'])
     
+    if (L == 32 or L == 64):
+        Jdis = ['Jdis01','Jdis05','Jdis10']
     if (L == 128 or L == 256):
-            Jdis = ['Jdis01']
-
-    for j in range(len(Jdis)):        
-
-        if (L == 32 and j == 0):
+        Jdis = ['Jdis01','Jdis05']
+    
+    for j in range(len(Jdis)):
+        print(Jdis[j])
+        if (L == 32):
             N = 10000
-        elif (L == 32 and j != 0):
+        """elif (L == 32 and j != 0):
+            N = 1000"""
+        if (L == 128 or L == 64):
             N = 1000
-        elif (L == 64):
-            N = 1000
-        elif (L == 128 or L == 256):
+        elif (L == 256):
             N = 100
-        
+
         jdis = Jdis[j]
         J = float(Jdis[j][4] + '.' + Jdis[j][5])
 
         myfile = '/home/liusf/test/Sorting_data/metadata/SOP/'+ jdis + '/Dimer-Oz/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m30_dim-sop_AV'+ str(N) +'.csv'
         df = pd.read_csv(myfile)
+        
+        if (L == 32 or L == 64):
+            myfile2 = '/home/liusf/test/Sorting_data/metadata/SOP/'+ jdis + '/Dimer0-Oz/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m30_dim-sop_AV100.csv'
+            
+        if (L == 128 or L == 256):
+            myfile2 = '/home/liusf/test/Sorting_data/metadata/SOP/'+ jdis + '/Dimer0-Oz/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m30_dim-sop_AV10.csv'
+            
+        df2 = pd.read_csv(myfile2)
+        df = df2.append(df)
+
         plt.plot(df['Dimerization'] ,df['O^z'],choose_color(L)+choose_marker(J), markersize = 6, label = 'L=%d, $\delta$ = %s, AVG(%d)' %(L, J, N))
-        #plt.errorbar(df['x2-x1'], df['corr'], yerr=df['error']/np.sqrt(df['N']), linestyle='None', color=colors[i%6], capsize=3, capthick=1, label=None)
+        plt.errorbar(df['Dimerization'], df['O^z'], yerr=df['error'], linestyle='None', capsize=3, capthick=1, label=None)        
+        
+        
+
 
 plt.xlabel(r'$Dimerization$', fontsize=14)
 plt.ylabel(r'$O^z(r=L/2)$', fontsize=14)

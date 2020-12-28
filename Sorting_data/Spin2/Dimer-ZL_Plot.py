@@ -7,12 +7,11 @@ import numpy as np
 import matplotlib.pyplot as plt 
 from scipy.optimize import curve_fit
 
-spin = 1.0
+spin = 2.0
 BC = 'PBC'
 P = 10
-Ls = [32]
+Ls = [32, 64]
 Jdis = ['Jdis000']
-M = [30, 40, 50]
 
 init_D = 5 #0.05
 final_D = 100 #1.0
@@ -37,15 +36,14 @@ init_seed = 1
 for i in range(len(Ls)):
     L = Ls[i]
     dfstr = pd.DataFrame(columns = ['Dimerization', 'O^z'])
-    for k in range(len(M)):
-        m = M[k]
-        for j in range(len(Jdis)):
-            jdis = Jdis[j]
-            J = float(Jdis[j][4] + '.' + Jdis[j][5])
+    
+    for j in range(len(Jdis)):
+        jdis = Jdis[j]
+        J = float(Jdis[j][4] + '.' + Jdis[j][5])
 
-            myfile = '/home/liusf/test/Sorting_data/metadata/ZL/'+ jdis + '/Dimer-ZL/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m' + str(m) + '_dim-zl_AV'+ str(N) +'.csv'
-            df = pd.read_csv(myfile)
-            plt.plot(df['Dimerization'], df['ZL'], "o-", markersize = 8, label = 'L=%d, $\chi$= %d' %(L, m))
+        myfile = '/home/liusf/test/Sorting_data/Spin2/metadata/ZL/'+ jdis + '/Dimer-ZL/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m30_dim-zl_AV'+ str(N) +'.csv'
+        df = pd.read_csv(myfile)
+        plt.plot(df['Dimerization'], df['ZL'], "o-", markersize = 8, label = 'L=%d' %(L))
 
 plt.xlabel(r'$Dimerization$', fontsize=14)
 plt.ylabel(r'$Z(L)$', fontsize=12)
@@ -53,7 +51,7 @@ plt.ylabel(r'$Z(L)$', fontsize=12)
 plt.ylim(-1, 1)
 #plt.xscale('log')
 #plt.yscale('log')
-plt.title(r'Dimerization vs $Z(L)$, spin = %s, $\delta$ = %s' % (spin, J), fontsize=12)
+plt.title(r'Dimerization vs $Z(L)$, spin = %s, $\delta$ = %s, $\chi$ = 30' % (spin, J), fontsize=12)
 plt.legend(loc = 'best',fontsize=12)
-plt.savefig( BC + '_' + jdis + '_P'+ str(P) +'_ZL-Dimerization.pdf', format='pdf', dpi=4000)
+plt.savefig( 'Spin2_' + BC + '_' + jdis + '_P'+ str(P) +'_m30_ZL-Dimerization.pdf', format='pdf', dpi=4000)
 plt.show()

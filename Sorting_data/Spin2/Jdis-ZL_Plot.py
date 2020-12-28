@@ -10,7 +10,7 @@ from scipy.optimize import curve_fit
 spin = 1.0
 BC = 'PBC'
 P = 10
-Ls = [32,64]
+Ls = [32]
 Jdis = ['Jdis090','Jdis095','Jdis100','Jdis105','Jdis110','Jdis115','Jdis120']
 Dimer = ["Dim000"]
 Ns = [100]
