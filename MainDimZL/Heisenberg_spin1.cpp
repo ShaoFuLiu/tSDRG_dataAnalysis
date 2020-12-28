@@ -50,27 +50,13 @@ void tSDRG_XXZ(int L, int chi, int Pdis, double Jdis, string BC, double S, doubl
     /// create folder in order to save data
     string file, dis, dim, folder, file_name, file_name1, file_name2, file_nameS;
     if (Jdis < 1.0)
-        dis = "0" + to_string( (int)(Jdis*10) );
-    else if (Jdis == 1.0)
-        dis = "10";
-    else if (Jdis == 2.0)
-        dis = "20";
-    else if (Jdis == 3.0)
-        dis = "30";
-    else if (Jdis > 1.0)
-        dis = to_string( (int)(Jdis*10) );
-
+        dis = "0" + to_string( (int)(round(Jdis*100)) );
+    else if (Jdis >= 1.0)
+        dis = to_string( (int)(round(Jdis*100)) ); 
     if (Dim < 1.0)
-        dim = "0" + to_string( (int)(Dim*10) );
-    else if (Dim == 1.0)
-        dim = "10";
-    else if (Dim == 2.0)
-        dim = "20";
-    else if (Dim == 3.0)
-        dim = "30";
-    else if (Dim > 1.0)
-        dim = to_string( (int)(Dim*10) );
-
+        dim = "0" + to_string( (int)(round(Dim*100)) );
+    else if (Dim >= 1.0)
+        dim = to_string( (int)(round(Dim*100)) );
 
     /// return: TTN(w_up and w_loc) and energy spectrum of top tensor
     vector<uni10::UniTensor<double> > w_up;      // w_up is isometry tensor = VT
