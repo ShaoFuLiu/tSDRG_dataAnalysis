@@ -10,15 +10,13 @@ from scipy.optimize import curve_fit
 spin = 1.0
 BC = 'PBC'
 P = 10
-Ls = [32,64,128]
+Ls = [16,32,48,64,128]
 Jdis = ['Jdis090','Jdis095','Jdis100','Jdis105','Jdis110','Jdis115','Jdis120']
 Dimer = ["Dim000"]
 init_seed = 1
-
+N = 1000
 for l in range(len(Ls)):
     L = Ls[l]
-    if (L == 32 or L == 64):
-        N = 1000
     if (L == 128):
         N = 100
     dfstr = pd.DataFrame(columns = ['Jdis', 'O^z'])
