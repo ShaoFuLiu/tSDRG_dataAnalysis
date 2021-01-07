@@ -78,14 +78,14 @@ for i in range(len(Ls)):
         jdis = Jdis[j]
         J = float(Jdis[j][4] + '.' + Jdis[j][5])
 
-        myfile = '/home/liusf/test/Sorting_data/metadata/SOP/'+ jdis + '/Dimer-Oz/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m30_dim-sop_AV'+ str(N) +'.csv'
+        myfile = '/home/liusf/test/Sorting_data/Spin1/metadata/SOP/'+ jdis + '/Dimer-Oz/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m30_dim-sop_AV'+ str(N) +'.csv'
         df = pd.read_csv(myfile)
         
         if (L == 32 or L == 64):
-            myfile2 = '/home/liusf/test/Sorting_data/metadata/SOP/'+ jdis + '/Dimer0-Oz/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m30_dim-sop_AV100.csv'
+            myfile2 = '/home/liusf/test/Sorting_data/Spin1/metadata/SOP/'+ jdis + '/Dimer0-Oz/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m30_dim-sop_AV100.csv'
             
         if (L == 128 or L == 256):
-            myfile2 = '/home/liusf/test/Sorting_data/metadata/SOP/'+ jdis + '/Dimer0-Oz/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m30_dim-sop_AV10.csv'
+            myfile2 = '/home/liusf/test/Sorting_data/Spin1/metadata/SOP/'+ jdis + '/Dimer0-Oz/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m30_dim-sop_AV10.csv'
             
         df2 = pd.read_csv(myfile2)
         df = df2.append(df)

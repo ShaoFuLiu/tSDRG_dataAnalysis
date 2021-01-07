@@ -24,7 +24,7 @@ for l in range(len(Ls)):
         dimer = Dimer[d]
         D = float(Dimer[d][3] + '.' + Dimer[d][4])
 
-        myfile = '/home/liusf/test/Sorting_data/metadata/ZL/'+ dimer + '/Jdis-ZL/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m30_jdis-zl_AV'+ str(N) +'.csv'
+        myfile = '/home/liusf/test/Sorting_data/Spin1/metadata/ZL/'+ dimer + '/Jdis-ZL/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m30_jdis-zl_AV'+ str(N) +'.csv'
         df = pd.read_csv(myfile)
         plt.plot(df['Jdis'], df['ZL'], "o-", markersize = 8, label = 'L=%d, AVG(%d)' %(L, N))
         if (N != 1):

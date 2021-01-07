@@ -11,7 +11,7 @@ spin = 1.0
 BC = 'PBC'
 P = 10
 Ls = [64]
-Jdis = ['Jdis000','Jdis020','Jdis040','Jdis060','Jdis080','Jdis100']
+Jdis = ['Jdis000','Jdis020','Jdis040','Jdis060','Jdis080','Jdis100','Jdis105','Jdis110','Jdis150','Jdis200',]
 chis = [30]
 datanum = 1000
 init_seed = 1
@@ -29,7 +29,7 @@ for i in range(len(Ls)):
             elif(j != 0):
                 N = datanum
 
-            myfile = '/home/liusf/test/Sorting_data/metadata/ZL/'+ jdis + '/Dimer-ZL/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m' + str(M) + '_dim-zl_AV'+ str(N) +'.csv'
+            myfile = '/home/liusf/test/Sorting_data/Spin1/metadata/ZL/'+ jdis + '/Dimer-ZL/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m' + str(M) + '_dim-zl_AV'+ str(N) +'.csv'
             df = pd.read_csv(myfile)
             plt.plot(df['Dimerization'], df['ZL'], "o-", markersize = 8, label = 'L=%d, R=%.2f, $\chi$= %d, AVG=%d' %(L, J, M, N))
             plt.errorbar(df['Dimerization'], df['ZL'], yerr=df['error'], linestyle='None', capsize=3, capthick=1, label=None) 

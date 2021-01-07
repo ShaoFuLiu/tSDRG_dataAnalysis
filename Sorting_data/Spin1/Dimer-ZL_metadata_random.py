@@ -1,4 +1,4 @@
-# Dimerization & ZL (only for Jdis000)
+# Dimerization & ZL
 ### average raw data to meta data
 
 import os
@@ -10,7 +10,7 @@ from scipy.optimize import curve_fit
 
 BC = 'PBC'
 Ls = [32]
-Jdis = ['Jdis000']
+Jdis = ['Jdis050','Jdis100']
 init_D = 20 #real value is devide by 100
 final_D = 80 #1.0
 space = 20
@@ -31,7 +31,7 @@ for i in range(file_num):
 
 P = 10
 chis = [8]
-N = 1
+N = 2
 init_seed = 1
 
 arr = []
@@ -49,18 +49,38 @@ for i in range(len(Ls)):
         for j in range(len(Jdis)):
             jdis = Jdis[j]
             J = float(Jdis[j][4] + '.' + Jdis[j][5] + Jdis[j][6])
-            x = 0
 
             for d in range(len(Dimer)):
                 dimer = Dimer[d]
                 D = float(Dimer[d][3] + '.' + Dimer[d][4] + Dimer[d][5])
-                #myfile = '/home/liusf/tSDRG/MainDim/data2/'+ BC +'/'+ jdis + '/'+ dimer + '/L'+ str(L) +'_P'+ str(P) +'_m30_'+ num + '/ZL.csv'
-                myfile = '/home/liusf/tSDRG/Main/data/'+ BC +'/'+ jdis + '/'+ dimer + '/L'+ str(L) +'_P'+ str(P) + '_m' + str(M) + '_1/ZL.csv'
-                df = pd.read_csv(myfile)
-                mean = {'Dimerization':D ,'ZL':df['ZL'][0],'error':0}
+                x = 0
+
+                for k in range(len(arr)):
+                    num = arr[k]
+                    #myfile = '/home/liusf/tSDRG/MainDim/data2/'+ BC +'/'+ jdis + '/'+ dimer + '/L'+ str(L) +'_P'+ str(P) +'_m30_'+ num + '/ZL.csv'
+                    myfile = '/home/liusf/tSDRG/Main/data/'+ BC +'/'+ jdis + '/'+ dimer + '/L'+ str(L) +'_P'+ str(P) + '_m' + str(M) + '_' + num + '/ZL.csv'
+                    df = pd.read_csv(myfile)
+                    if(k == 0):
+                        dftc = df['ZL']
+                    dfc = df['ZL']
+
+                    if(k != 0):
+                        dftc += dfc
+                dfavc = dftc/N 
+
+                for a in range(len(arr)):
+                    num = arr[a]
+                    myfile = '/home/liusf/tSDRG/Main/data/'+ BC +'/'+ jdis + '/'+ dimer + '/L'+ str(L) +'_P'+ str(P) +'_m'+ str(M) +'_'+ num + '/ZL.csv'
+                    df = pd.read_csv(myfile)
+                    x += np.square(df['ZL'][0]-dfavc.mean())
+                
+                std = np.sqrt(x/(N-1))
+                error = std/np.sqrt(N)
+                mean = {'Dimerization':D ,'ZL':dfavc.mean(),'error':error}  ## second average(1 times)
+                ## total average times = N
                 dfstr.loc[d] = mean
 
-            direc = '/home/liusf/tSDRG/Sorting_data/metadata/ZL/'+ jdis
+            direc = '/home/liusf/tSDRG/Sorting_data/Spin1/metadata/ZL/'+ jdis
             if (os.path.exists(direc) == False):
                 os.mkdir(direc)
             direc2 = direc + '/Dimer-ZL'

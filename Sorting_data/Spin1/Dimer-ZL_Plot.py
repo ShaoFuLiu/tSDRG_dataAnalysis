@@ -25,7 +25,7 @@ for i in range(len(Ls)):
             jdis = Jdis[j]
             J = float(Jdis[j][4] + '.' + Jdis[j][5])
 
-            myfile = '/home/liusf/test/Sorting_data/metadata/ZL/'+ jdis + '/Dimer-ZL/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m' + str(M) + '_dim-zl_AV'+ str(N) +'.csv'
+            myfile = '/home/liusf/test/Sorting_data/Spin1/metadata/ZL/'+ jdis + '/Dimer-ZL/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m' + str(M) + '_dim-zl_AV'+ str(N) +'.csv'
             df = pd.read_csv(myfile)
             plt.plot(df['Dimerization'], df['ZL'], "o-", markersize = 8, label = 'L=%d, $\chi$= %d' %(L, M))
 
