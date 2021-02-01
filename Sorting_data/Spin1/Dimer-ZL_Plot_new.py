@@ -41,7 +41,7 @@ spin = 1.0
 BC = 'PBC'
 P = 10
 Ls = [16,32,48,64]
-Jdis = ['Jdis100','Jdis105','Jdis110']
+Jdis = ['Jdis110']
 chis = [30]
 datanum = 250
 init_seed = 1
@@ -77,5 +77,5 @@ plt.ylabel(r'$Z(L)$', fontsize=12)
 plt.title(r'Dimerization vs $Z(L)$, spin = %s' % (spin), fontsize=12)
 plt.legend(loc = 'best',fontsize=8)
 plt.grid(linestyle='-', linewidth=1)
-plt.savefig( 'Spin1_L_' + BC + '_P'+ str(P) +'_ZL-Dimerization.pdf', format='pdf', dpi=4000)
+plt.savefig( 'Spin1_L_'+ BC + '_' + Jdis[0] + '_P'+ str(P) +'_ZL-Dimerization.pdf', format='pdf', dpi=4000)
 plt.show()
