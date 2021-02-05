@@ -40,32 +40,32 @@ def choose_marker(delta):
 spin = 1.0
 BC = 'PBC'
 P = 10
-Ls = [16,32,48,64]
-Jdis = ['Jdis110']
+Ls = [64]
+Jdis = ['Jdis000','Jdis020','Jdis040','Jdis060','Jdis080','Jdis100','Jdis105','Jdis110','Jdis150','Jdis200']
 chis = [30]
-datanum = 250
-init_seed = 1
-N = datanum
+N = 1000
+
 for i in range(len(Ls)):
     L = Ls[i]
     dfstr = pd.DataFrame(columns = ['Dimerization', 'O^z'])
-    if(L == 64):
+    """if(L == 64):
         N = 1000
     elif(L != 64):
-        N = datanum
+        N = datanum"""
     for m in range(len(chis)):
         M = chis[m]
         for j in range(len(Jdis)):
             jdis = Jdis[j]
             J = float(Jdis[j][4] + '.' + Jdis[j][5] + Jdis[j][6])
-            """if(j == 0):
+            if(j == 0):
                 N = 1
             elif(j != 0):
-                N = datanum""" # plot for both nonrandom and random
+                N = 1000 # plot for both nonrandom and random
 
             myfile = '/home/liusf/test/Sorting_data/Spin1/metadata/ZL/'+ jdis + '/Dimer-ZL/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m' + str(M) + '_dim-zl_AV'+ str(N) +'.csv'
             df = pd.read_csv(myfile)
-            plt.plot(df['Dimerization'], df['ZL'], choose_color(i)+choose_marker(j), markersize = 4, label = 'L=%d, R=%.2f, $\chi$= %d, AVG=%d' %(L, J, M, N))
+            #plt.plot(df['Dimerization'], df['ZL'], choose_color(i)+choose_marker(j), markersize = 4, label = 'L=%d, R=%.2f, $\chi$= %d, AVG=%d' %(L, J, M, N))
+            plt.plot(df['Dimerization'], df['ZL'], '-o', markersize = 4, label = 'L=%d, R=%.2f, $\chi$= %d, AVG=%d' %(L, J, M, N))
             plt.errorbar(df['Dimerization'], df['ZL'], yerr=df['error'], linestyle='None', capsize=3, capthick=1, label=None) 
 
 plt.xlabel(r'$Dimerization$', fontsize=14)
@@ -77,5 +77,5 @@ plt.ylabel(r'$Z(L)$', fontsize=12)
 plt.title(r'Dimerization vs $Z(L)$, spin = %s' % (spin), fontsize=12)
 plt.legend(loc = 'best',fontsize=8)
 plt.grid(linestyle='-', linewidth=1)
-plt.savefig( 'Spin1_L_'+ BC + '_' + Jdis[0] + '_P'+ str(P) +'_ZL-Dimerization.pdf', format='pdf', dpi=4000)
+plt.savefig( 'Spin1_'+ BC +'_P'+ str(P) +'_ZL-Dimerization.pdf', format='pdf', dpi=4000)
 plt.show()

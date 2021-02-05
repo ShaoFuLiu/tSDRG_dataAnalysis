@@ -11,9 +11,9 @@ spin = int(2)
 BC = 'PBC'
 P = 10
 Ls = [16,32,48,64]
-Jdis = ['Jdis200','Jdis205','Jdis210','Jdis215','Jdis220']
+Jdis = ['Jdis250','Jdis300','Jdis350','Jdis400','Jdis450']
 Dimer = ["Dim000"]
-Ns = [1000]
+Ns = [250]
 init_seed = 1
 
 for n in range(len(Ns)):

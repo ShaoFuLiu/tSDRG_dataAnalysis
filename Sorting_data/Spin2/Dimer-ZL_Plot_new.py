@@ -42,10 +42,10 @@ BC = 'PBC'
 P = 10
 Ls = [64]
 #Jdis = ['Jdis000','Jdis050','Jdis100','Jdis150','Jdis200','Jdis250']
-Jdis = ['Jdis160','Jdis180','Jdis200','Jdis210','Jdis220','Jdis240']
+Jdis = ['Jdis200','Jdis205','Jdis210','Jdis215','Jdis220']
 chis = [40]
-datanum = 500
-init_seed = 1
+datanum = 2000
+N = datanum
 
 for i in range(len(Ls)):
     L = Ls[i]
@@ -55,10 +55,10 @@ for i in range(len(Ls)):
         for j in range(len(Jdis)):
             jdis = Jdis[j]
             J = float(Jdis[j][4] + '.' + Jdis[j][5] + Jdis[j][6])
-            if(jdis == 'Jdis200'):
+            """if(jdis == 'Jdis200'):
                 N = 1000
             elif(jdis != 'Jdis200'):
-                N = datanum
+                N = datanum"""
             M = chis[m]
             myfile = '/home/liusf/test/Sorting_data/Spin2/metadata/ZL/'+ jdis + '/Dimer-ZL/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m' + str(M) + '_dim-zl_AV'+ str(N) +'.csv'
             df = pd.read_csv(myfile)
@@ -68,11 +68,11 @@ for i in range(len(Ls)):
 plt.xlabel(r'$Dimerization$', fontsize=14)
 plt.ylabel(r'$Z(L)$', fontsize=14)
 plt.xlim(0,0.5)
-plt.ylim(-0.05, 0.05)
+plt.ylim(-0.01, 0.03)
 #plt.xscale('log')
 #plt.yscale('log')
 plt.title(r'Dimerization vs $Z(L)$, spin = %s' % (spin), fontsize=12)
 plt.legend(loc = 'best',fontsize=8)
 plt.grid(linestyle='-', linewidth=1)
-plt.savefig( 'Spin2_' + BC + '_P'+ str(P) +'_ZL-Dimerization2.pdf', format='pdf', dpi=4000)
+plt.savefig( 'Spin2_' + BC + '_P'+ str(P) +'_ZL-Dimerization3.pdf', format='pdf', dpi=4000)
 plt.show()
