@@ -44,12 +44,12 @@ Ls = [64]
 #Jdis = ['Jdis000','Jdis050','Jdis100','Jdis150','Jdis200','Jdis250']
 Jdis = ['Jdis200','Jdis205','Jdis210','Jdis215','Jdis220']
 chis = [40]
-datanum = 2000
+datanum = 4000
 N = datanum
 
 for i in range(len(Ls)):
     L = Ls[i]
-    dfstr = pd.DataFrame(columns = ['Dimerization', 'O^z'])
+
     for m in range(len(chis)):
         
         for j in range(len(Jdis)):
@@ -60,7 +60,7 @@ for i in range(len(Ls)):
             elif(jdis != 'Jdis200'):
                 N = datanum"""
             M = chis[m]
-            myfile = '/home/liusf/test/Sorting_data/Spin2/metadata/ZL/'+ jdis + '/Dimer-ZL/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m' + str(M) + '_dim-zl_AV'+ str(N) +'.csv'
+            myfile = '/home/liusf/test/Sorting_data/Spin'+ str(int(spin)) +'/metadata/ZL/'+ jdis + '/Dimer-ZL/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m' + str(M) + '_dim-zl_AV'+ str(N) +'.csv'
             df = pd.read_csv(myfile)
             plt.plot(df['Dimerization'], df['ZL'], choose_marker(j), markersize = 4, label = 'L=%d, R=%.2f, $\chi$= %d, AVG=%d' %(L, J, M, N))
             plt.errorbar(df['Dimerization'], df['ZL'], yerr=df['error'], linestyle='None', capsize=3, capthick=1, label=None) 
@@ -74,5 +74,5 @@ plt.ylim(-0.01, 0.03)
 plt.title(r'Dimerization vs $Z(L)$, spin = %s' % (spin), fontsize=12)
 plt.legend(loc = 'best',fontsize=8)
 plt.grid(linestyle='-', linewidth=1)
-plt.savefig( 'Spin2_' + BC + '_P'+ str(P) +'_ZL-Dimerization3.pdf', format='pdf', dpi=4000)
+plt.savefig( 'Spin2_' + BC + '_P'+ str(P) +'_ZL-Dimerization4.pdf', format='pdf', dpi=4000)
 plt.show()
