@@ -11,7 +11,7 @@ spin = int(2)
 BC = 'PBC'
 P = 10
 Ls = [16,32,48,64]
-Jdis = ['Jdis250','Jdis300','Jdis350','Jdis400','Jdis450']
+#Jdis = ['Jdis050','Jdis100','Jdis150','Jdis200','Jdis250','Jdis300','Jdis350','Jdis400','Jdis450']
 Dimer = ["Dim000"]
 Ns = [4000,3000,2000,1000]
 init_seed = 1
@@ -40,5 +40,6 @@ plt.ylabel(r'$Z(L)$', fontsize=12)
 #plt.yscale('log')
 plt.title(r'R vs $Z(L)$, spin = %s, $\dimer$ = %s, $\chi$ = 40' % (spin, D), fontsize=12)
 plt.legend(loc = 'best',fontsize=12)
-plt.savefig( 'Spin'+ str(spin) +'_' + BC +'_'+ dimer +'_P'+ str(P) +'_m40_ZL-Jdis.pdf', format='pdf', dpi=4000)
+#plt.savefig( 'Spin'+ str(spin) +'_' + BC +'_'+ dimer +'_P'+ str(P) +'_m40_ZL-Jdis.pdf', format='pdf', dpi=4000)
+plt.savefig( 'Spin'+ str(spin) +'_' + BC + '_P'+ str(P) +'_ZL-Jdis.pdf', format='pdf', dpi=4000)
 plt.show()

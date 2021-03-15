@@ -44,7 +44,7 @@ Ls = [64]
 #Jdis = ['Jdis000','Jdis050','Jdis100','Jdis150','Jdis200','Jdis250']
 Jdis = ['Jdis200','Jdis205','Jdis210','Jdis215','Jdis220']
 chis = [40]
-datanum = 4000
+datanum = 6000
 N = datanum
 
 for i in range(len(Ls)):
@@ -74,5 +74,5 @@ plt.ylim(-0.01, 0.03)
 plt.title(r'Dimerization vs $Z(L)$, spin = %s' % (spin), fontsize=12)
 plt.legend(loc = 'best',fontsize=8)
 plt.grid(linestyle='-', linewidth=1)
-plt.savefig( 'Spin2_' + BC + '_P'+ str(P) +'_ZL-Dimerization4.pdf', format='pdf', dpi=4000)
+plt.savefig( 'Spin2_' + BC + '_P'+ str(P) +'_ZL-Dimerization6-2.pdf', format='pdf', dpi=4000)
 plt.show()
