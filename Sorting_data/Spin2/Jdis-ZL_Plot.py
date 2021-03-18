@@ -1,10 +1,10 @@
-# Dimerization & String Order Parameter 
+# Dimerization & String Order Parameter
 ### Plot
 import os
 import math
-import pandas as pd 
+import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 
 spin = int(2)
@@ -13,7 +13,7 @@ P = 10
 Ls = [16,32,48,64]
 #Jdis = ['Jdis050','Jdis100','Jdis150','Jdis200','Jdis250','Jdis300','Jdis350','Jdis400','Jdis450']
 Dimer = ["Dim000"]
-Ns = [4000,3000,2000,1000]
+Ns = [5000,5000,5000,5000]
 init_seed = 1
 
 
@@ -21,7 +21,7 @@ for l in range(len(Ls)):
     L = Ls[l]
     N = Ns[l]
     dfstr = pd.DataFrame(columns = ['Jdis', 'O^z'])
-    
+
     for d in range(len(Dimer)):
         dimer = Dimer[d]
         D = float(Dimer[d][3] + '.' + Dimer[d][4])
