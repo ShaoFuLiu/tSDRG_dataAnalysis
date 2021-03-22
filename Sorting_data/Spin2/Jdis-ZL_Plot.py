@@ -10,10 +10,10 @@ from scipy.optimize import curve_fit
 spin = int(2)
 BC = 'PBC'
 P = 10
-Ls = [16,32,48,64]
+Ls = [16,32,48,64,128]
 #Jdis = ['Jdis050','Jdis100','Jdis150','Jdis200','Jdis250','Jdis300','Jdis350','Jdis400','Jdis450']
 Dimer = ["Dim000"]
-Ns = [5000,5000,5000,5000]
+Ns = [6000,6000,6000,6000,2000]
 init_seed = 1
 
 
@@ -34,8 +34,8 @@ for l in range(len(Ls)):
 
 plt.xlabel(r'$R$', fontsize=14)
 plt.ylabel(r'$Z(L)$', fontsize=12)
-#plt.xlim(0.1,1.5)
-#plt.ylim(-0.5, 0.1)
+#plt.xlim(0.6,1)
+#plt.ylim(0.15, 0.2)
 #plt.xscale('log')
 #plt.yscale('log')
 plt.title(r'R vs $Z(L)$, spin = %s, $\dimer$ = %s, $\chi$ = 40' % (spin, D), fontsize=12)

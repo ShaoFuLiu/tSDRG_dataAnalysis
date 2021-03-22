@@ -1,10 +1,10 @@
-# Dimerization & twist Order Parameter 
+# Dimerization & twist Order Parameter
 ### Plot
 import os
 import math
-import pandas as pd 
+import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 
 def choose_color(L):
@@ -66,12 +66,12 @@ for i in range(len(Ls)):
             df = pd.read_csv(myfile)
             #plt.plot(df['Dimerization'], df['ZL'], choose_color(i)+choose_marker(j), markersize = 4, label = 'L=%d, R=%.2f, $\chi$= %d, AVG=%d' %(L, J, M, N))
             plt.plot(df['Dimerization'], df['ZL'], '-o', markersize = 4, label = 'L=%d, R=%.2f, $\chi$= %d, AVG=%d' %(L, J, M, N))
-            plt.errorbar(df['Dimerization'], df['ZL'], yerr=df['error'], linestyle='None', capsize=3, capthick=1, label=None) 
+            plt.errorbar(df['Dimerization'], df['ZL'], yerr=df['error'], linestyle='None', capsize=3, capthick=1, label=None)
 
 plt.xlabel(r'$Dimerization$', fontsize=14)
 plt.ylabel(r'$Z(L)$', fontsize=12)
-#plt.xlim(0.1,1.5)
-#plt.ylim(-1, 1)
+plt.xlim(0,0.3)
+plt.ylim(-0.2,0.2)
 #plt.xscale('log')
 #plt.yscale('log')
 plt.title(r'Dimerization vs $Z(L)$, spin = %s' % (spin), fontsize=12)
