@@ -14,7 +14,7 @@ L = 64
 M = 30
 N = 1000
 
-myfile = '/home/liusf/test/Sorting_data/Spin1/Phase-Diagram.csv'
+myfile = '/home/liusf/tSDRG_DataAnalysis/Sorting_data/Spin1/Phase-Diagram.csv'
 df = pd.read_csv(myfile)
 plt.plot( df['Dimerization'],df['Disorder'], '-o', markersize = 4)
 
