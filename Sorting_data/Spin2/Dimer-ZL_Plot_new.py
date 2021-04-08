@@ -61,7 +61,7 @@ for i in range(len(Ls)):
             elif(jdis != 'Jdis217'):
                 N = datanum
             M = chis[m]
-            myfile = '/home/liusf/test/Sorting_data/Spin'+ str(int(spin)) +'/metadata/ZL/'+ jdis + '/Dimer-ZL/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m' + str(M) + '_dim-zl_AV'+ str(N) +'.csv'
+            myfile = '/home/liusf/tSDRG_DataAnalysis/Sorting_data/Spin'+ str(int(spin)) +'/metadata/ZL/'+ jdis + '/Dimer-ZL/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m' + str(M) + '_dim-zl_AV'+ str(N) +'.csv'
             df = pd.read_csv(myfile)
             plt.plot(df['Dimerization'], df['ZL'], choose_marker(j), markersize = 4, label = 'L=%d, R=%.2f, $\chi$= %d, AVG=%d' %(L, J, M, N))
             plt.errorbar(df['Dimerization'], df['ZL'], yerr=df['error'], linestyle='None', capsize=3, capthick=1, label=None)
@@ -72,7 +72,7 @@ plt.xlim(0.2,0.45)
 plt.ylim(-0.005, 0.005)
 #plt.xscale('log')
 #plt.yscale('log')
-plt.title(r'Dimerization vs $Z(L)$, spin = %s' % (spin), fontsize=12)
+plt.title(r'spin = %s' % (spin), fontsize=12)
 plt.legend(loc = 'best',fontsize=8)
 plt.grid(linestyle='-', linewidth=1)
 plt.savefig( 'Spin2_' + BC + '_P'+ str(P) +'_ZL-Dimerization7-4.pdf', format='pdf', dpi=4000)
