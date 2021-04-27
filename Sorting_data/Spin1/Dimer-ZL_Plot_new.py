@@ -48,7 +48,10 @@ N = 1000
 for i in range(len(Ls)):
     L = Ls[i]
     dfstr = pd.DataFrame(columns = ['Dimerization', 'O^z'])
-
+    """if(L == 64):
+        N = 1000
+    elif(L != 64):
+        N = datanum"""
     for m in range(len(chis)):
         M = chis[m]
         for j in range(len(Jdis)):
@@ -59,7 +62,7 @@ for i in range(len(Ls)):
             elif(j != 0):
                 N = 1000 # plot for both nonrandom and random
 
-            myfile = '/home/liusf/tSDRG_DataAnalysis/Sorting_data/Spin1/metadata/ZL/'+ jdis + '/Dimer-ZL/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m' + str(M) + '_dim-zl_AV'+ str(N) +'.csv'
+            myfile = '/home/liusf/test/Sorting_data/Spin1/metadata/ZL/'+ jdis + '/Dimer-ZL/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m' + str(M) + '_dim-zl_AV'+ str(N) +'.csv'
             df = pd.read_csv(myfile)
             #plt.plot(df['Dimerization'], df['ZL'], choose_color(i)+choose_marker(j), markersize = 4, label = 'L=%d, R=%.2f, $\chi$= %d, AVG=%d' %(L, J, M, N))
             plt.plot(df['Dimerization'], df['ZL'], '-o', markersize = 4, label = 'L=%d, R=%.2f, $\chi$= %d, AVG=%d' %(L, J, M, N))
@@ -71,7 +74,7 @@ plt.xlim(0,0.3)
 plt.ylim(-0.2,0.2)
 #plt.xscale('log')
 #plt.yscale('log')
-plt.title(r'spin = %s' % (spin), fontsize=12)
+plt.title(r'Dimerization vs $Z(L)$, spin = %s' % (spin), fontsize=12)
 plt.legend(loc = 'best',fontsize=8)
 plt.grid(linestyle='-', linewidth=1)
 plt.savefig( 'Spin1_'+ BC +'_P'+ str(P) +'_ZL-Dimerization.pdf', format='pdf', dpi=4000)
