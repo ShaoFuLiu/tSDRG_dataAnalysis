@@ -87,57 +87,19 @@ cnames = {
 'olivedrab':            '#6B8E23',
 'orange':               '#FFA500',
 'orangered':            '#FF4500',
-'orchid':               '#DA70D6',
-'palegoldenrod':        '#EEE8AA',
-'palegreen':            '#98FB98',
-'paleturquoise':        '#AFEEEE',
-'palevioletred':        '#DB7093',
-'papayawhip':           '#FFEFD5',
-'peachpuff':            '#FFDAB9',
-'peru':                 '#CD853F',
-'pink':                 '#FFC0CB',
-'plum':                 '#DDA0DD',
-'powderblue':           '#B0E0E6',
-'purple':               '#800080',
-'red':                  '#FF0000',
-'rosybrown':            '#BC8F8F',
-'royalblue':            '#4169E1',
-'saddlebrown':          '#8B4513',
-'salmon':               '#FA8072',
-'sandybrown':           '#FAA460',
-'seagreen':             '#2E8B57',
-'seashell':             '#FFF5EE',
-'sienna':               '#A0522D',
-'silver':               '#C0C0C0',
-'skyblue':              '#87CEEB',
-'slateblue':            '#6A5ACD',
-'slategray':            '#708090',
-'snow':                 '#FFFAFA',
-'springgreen':          '#00FF7F',
-'steelblue':            '#4682B4',
-'tan':                  '#D2B48C',
-'teal':                 '#008080',
-'thistle':              '#D8BFD8',
-'tomato':               '#FF6347',
-'turquoise':            '#40E0D0',
-'violet':               '#EE82EE',
-'wheat':                '#F5DEB3',
-'white':                '#FFFFFF',
-'whitesmoke':           '#F5F5F5',
-'yellow':               '#FFFF00',
-'yellowgreen':          '#9ACD32'}
+'orchid':               '#DA70D6'}
 carr = []
 for cmap in cnames.keys():
     carr.append(cmap)
 
-spin = int(1)
+spin = int(2)
 BC = 'PBC'
 P = 10
 M = 30
-Ls = [16,32,48,64,96,128]
+Ls = [32,48,64,96,128,256]
 # Jdis = ['Jdis090','Jdis095','Jdis100','Jdis105','J1is110','Jdis115','Jdis120']
-Dimer = ["Dim040"]
-Ns = [1000,1000,1000,1000,500,500]
+Dimer = ["Dim000"]
+Ns = [1000,1000,1000,1000,1000,500]
 init_seed = 1
 
 for l in range(len(Ls)):
@@ -148,11 +110,11 @@ for l in range(len(Ls)):
         dimer = Dimer[d]
         D = float(Dimer[d][3] + '.' + Dimer[d][4])
 
-        myfile = '/home/liusf/tSDRG_DataAnalysis/Sorting_data/Spin'+ str(spin) +'/metadata/ZL/'+ dimer + '/Jdis-ZL/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m'+ str(M) +'_jdis-zl_AV'+ str(N) +'.csv'
+        myfile = '/home/liusf/tSDRG_DataAnalysis/Sorting_data/Spin'+ str(spin) +'/metadata/SOP/'+ dimer + '/Jdis-Oz/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m'+ str(M) +'_jdis-sop_AV'+ str(N) +'.csv'
         df = pd.read_csv(myfile)
-        plt.plot(df['Jdis'], df['ZL'], "o-", color=carr[l+d], markersize = 2, label = 'L=%d, AVG(%d)' %(L, N))
+        plt.plot(df['Jdis'], df['O^z'], "o-", color=carr[l+d], markersize = 2, label = 'L=%d, AVG(%d)' %(L, N))
         if (N != 1):
-            plt.errorbar(df['Jdis'], df['ZL'], yerr=df['error'], linestyle='None', capsize=3, capthick=1, color=carr[l+d], label=None)
+            plt.errorbar(df['Jdis'], df['O^z'], yerr=df['error'], linestyle='None', capsize=3, capthick=1, color=carr[l+d], label=None)
 
 plt.xlabel(r'$R$', fontsize=14)
 plt.ylabel(r'$Z(L)$', fontsize=12)
@@ -163,5 +125,5 @@ plt.ylabel(r'$Z(L)$', fontsize=12)
 plt.grid(linestyle='-', linewidth=1)
 plt.title('spin = %s, $\dimer$ = %s, $\chi$ = %d' % (spin, D, M), fontsize=12)
 plt.legend(loc = 'best',fontsize=12)
-plt.savefig( 'Spin'+ str(spin) +'_' + BC + '_P'+ str(P) +'_m'+ str(M) +'_ZL-Jdis.pdf', format='pdf', dpi=4000)
+plt.savefig( 'Spin'+ str(spin) +'_' + BC + '_P'+ str(P) +'_m'+ str(M) +'_Oz-Jdis.pdf', format='pdf', dpi=4000)
 plt.show()
