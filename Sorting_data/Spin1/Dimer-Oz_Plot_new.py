@@ -1,108 +1,96 @@
-# Dimerization & String Order Parameter 
+# Dimerization & String Order Parameter
 ### Plot
 import os
 import math
-import pandas as pd 
+import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 
+cnames = {
+'blue':                 '#0000FF',
+'blueviolet':           '#8A2BE2',
+'brown':                '#A52A2A',
+'burlywood':            '#DEB887',
+'cadetblue':            '#5F9EA0',
+'chocolate':            '#D2691E',
+'crimson':              '#DC143C',
+'cyan':                 '#00FFFF',
+'darkblue':             '#00008B',
+'darkcyan':             '#008B8B',
+'darkgoldenrod':        '#B8860B',
+'darkgray':             '#A9A9A9',
+'darkgreen':            '#006400',
+'darkkhaki':            '#BDB76B',
+'darkmagenta':          '#8B008B',
+'darkolivegreen':       '#556B2F',
+'darkorange':           '#FF8C00',
+'darkorchid':           '#9932CC',
+'darkred':              '#8B0000',
+'darksalmon':           '#E9967A',
+'darkseagreen':         '#8FBC8F',
+'darkslateblue':        '#483D8B',
+'darkslategray':        '#2F4F4F',
+'darkturquoise':        '#00CED1',
+'darkviolet':           '#9400D3',
+'deeppink':             '#FF1493',
+'deepskyblue':          '#00BFFF',
+'dimgray':              '#696969',
+'dodgerblue':           '#1E90FF',
+'firebrick':            '#B22222',
+'floralwhite':          '#FFFAF0',
+'forestgreen':          '#228B22',
+'fuchsia':              '#FF00FF',
+'gainsboro':            '#DCDCDC',
+'ghostwhite':           '#F8F8FF',
+'gold':                 '#FFD700',
+'goldenrod':            '#DAA520',
+'gray':                 '#808080',
+'green':                '#008000',
+'greenyellow':          '#ADFF2F',
+'honeydew':             '#F0FFF0',
+'hotpink':              '#FF69B4',
+'indianred':            '#CD5C5C',
+'indigo':               '#4B0082',
+'ivory':                '#FFFFF0',
+'khaki':                '#F0E68C',
+'orangered':            '#FF4500',
+'orchid':               '#DA70D6'}
+carr = []
+for cmap in cnames.keys():
+    carr.append(cmap)
+
+spin = int(1)
 BC = 'PBC'
-Ls = [32,64,128,256]
-Jdis = ['Jdis01','Jdis05','Jdis10']
-
-init_D = 10
-final_D = 60
-space = 2
-file_num = int ((final_D - init_D)/space+1)
-Dimer = []
-for i in range(file_num):
-    D = init_D + space*i
-    d = '0'+ str(D)[0] + str(D)[1]
-    Dimer.append('Dim' + d)
-
-def choose_color(L):
-    if (L == 32):
-        color = "r"
-        #marker = "o-"
-    elif (L == 64):
-        color = "g"
-        #marker = "x-"
-    elif (L == 128):
-        color = "b"
-        #marker = "v-"
-    elif (L == 256):
-        color = "y"
-        #marker = "*-"
-    return color
-
-def choose_marker(delta):
-    if (delta == 0.1):
-        #color = "r"
-        marker = "o-"
-    elif (delta == 0.5):
-        #color = "g"
-        marker = "x-"
-    elif (delta == 1.0):
-        #color = "b"
-         marker = "v-"
-    elif (delta == 1.5):
-        #color = "y"
-        marker = "*-"
-    return marker
-
 P = 10
-init_seed = 1
+Ls = [64]
+Jdis = ['Jdis030','Jdis060','Jdis090','Jdis120','Jdis150','Jdis180']
+N = 1100
+M = 30
 
 for i in range(len(Ls)):
     L = Ls[i]
-    print(L)
     dfstr = pd.DataFrame(columns = ['Dimerization', 'O^z'])
-    
-    if (L == 32 or L == 64):
-        Jdis = ['Jdis01','Jdis05','Jdis10']
-    if (L == 128 or L == 256):
-        Jdis = ['Jdis01','Jdis05']
-    
-    for j in range(len(Jdis)):
-        print(Jdis[j])
-        if (L == 32):
-            N = 10000
-        """elif (L == 32 and j != 0):
-            N = 1000"""
-        if (L == 128 or L == 64):
-            N = 1000
-        elif (L == 256):
-            N = 100
 
+    for j in range(len(Jdis)):
         jdis = Jdis[j]
         J = float(Jdis[j][4] + '.' + Jdis[j][5])
 
-        myfile = '/home/liusf/test/Sorting_data/Spin1/metadata/SOP/'+ jdis + '/Dimer-Oz/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m30_dim-sop_AV'+ str(N) +'.csv'
+        myfile = '/home/liusf/tSDRG_DataAnalysis/Sorting_data/Spin1/metadata/SOP/'+ jdis + '/Dimer-Oz/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m30_dim-sop_AV'+ str(N) +'.csv'
         df = pd.read_csv(myfile)
-        
-        if (L == 32 or L == 64):
-            myfile2 = '/home/liusf/test/Sorting_data/Spin1/metadata/SOP/'+ jdis + '/Dimer0-Oz/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m30_dim-sop_AV100.csv'
-            
-        if (L == 128 or L == 256):
-            myfile2 = '/home/liusf/test/Sorting_data/Spin1/metadata/SOP/'+ jdis + '/Dimer0-Oz/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m30_dim-sop_AV10.csv'
-            
-        df2 = pd.read_csv(myfile2)
-        df = df2.append(df)
 
-        plt.plot(df['Dimerization'] ,df['O^z'],choose_color(L)+choose_marker(J), markersize = 6, label = 'L=%d, $\delta$ = %s, AVG(%d)' %(L, J, N))
-        plt.errorbar(df['Dimerization'], df['O^z'], yerr=df['error'], linestyle='None', capsize=3, capthick=1, label=None)        
-        
-        
+        plt.plot(df['Dimerization'] ,df['O^z'], color=carr[i+j], markersize = 2, label = 'L=%d, $\delta$ = %s, AVG(%d)' %(L, J, N-100))
+        plt.errorbar(df['Dimerization'], df['O^z'], color=carr[i+j], yerr=df['error'], linestyle='None', capsize=3, capthick=1, label=None)
 
 
-plt.xlabel(r'$Dimerization$', fontsize=14)
-plt.ylabel(r'$O^z(r=L/2)$', fontsize=14)
+plt.xlabel(r'$Dimerization$', fontsize=12)
+plt.ylabel(r'$O^z(r=L/2)$', fontsize=12)
 #plt.xlim(0.1,1.5)
 #plt.ylim(0, 0.4)
 #plt.xscale('log')
 #plt.yscale('log')
-plt.title(r'Dimerization vs $O^z(r=L/2)$, $\chi$ = 30', fontsize=12)
-plt.legend(loc = 'best',fontsize=12)
+plt.title('spin = %s, $\chi$ = %s' % (spin, M), fontsize=12)
+plt.legend(loc = 'best',fontsize=8)
+plt.grid(linestyle='-', linewidth=1)
 plt.savefig( 'Spin1_'+ BC + '_P'+ str(P) +'_m30_Oz-Dimerization.pdf', format='pdf', dpi=4000)
 plt.show()

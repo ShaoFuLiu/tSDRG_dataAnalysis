@@ -14,11 +14,6 @@ cnames = {
 'burlywood':            '#DEB887',
 'cadetblue':            '#5F9EA0',
 'chocolate':            '#D2691E',
-'coral':                '#FF7F50',
-'cornflowerblue':       '#6495ED',
-'cornsilk':             '#FFF8DC',
-'crimson':              '#DC143C',
-'cyan':                 '#00FFFF',
 'darkblue':             '#00008B',
 'darkcyan':             '#008B8B',
 'darkgoldenrod':        '#B8860B',
@@ -108,13 +103,13 @@ for l in range(len(Ls)):
     for d in range(len(Dimer)):
         dimer = Dimer[d]
         D = float(Dimer[d][3] + '.' + Dimer[d][4])
-        myfile = '/home/liusf/test/Sorting_data/Spin'+ str(spin) +'/metadata/ZL/'+ dimer + '/Jdis-ZL/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m' + str(M) + '_jdis-zl_AV'+ str(N) +'.csv'
+        myfile = '/home/liusf/tSDRG_DataAnalysis/Sorting_data/Spin'+ str(spin) +'/metadata/ZL/'+ dimer + '/Jdis-ZL/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m' + str(M) + '_jdis-zl_AV'+ str(N) +'.csv'
         df = pd.read_csv(myfile)
         plt.plot(df['Jdis'], df['ZL'], "o-", color=carr[l+d], markersize = 2, label = 'L=%d, AVG(%d)' %(L, N))
         if (N != 1):
             plt.errorbar(df['Jdis'], df['ZL'], yerr=df['error'], linestyle='None', capsize=3, capthick=1, color=carr[l+d], label=None)
 
-plt.xlabel(r'$R$', fontsize=14)
+plt.xlabel(r'$R$', fontsize=12)
 plt.ylabel(r'$Z(L)$', fontsize=12)
 #plt.xlim(0.6,1)
 #plt.ylim(0.15, 0.2)
