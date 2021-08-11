@@ -63,20 +63,18 @@ for cmap in cnames.keys():
 spin = int(1)
 BC = 'PBC'
 P = 10
+Ms = [30]
 Ls = [64]
-Jdis = ['Jdis000','Jdis030','Jdis060','Jdis090','Jdis120','Jdis150','Jdis180']
-chis = [30]
+Jdis = ['Jdis000','Jdis020','Jdis040','Jdis060','Jdis080','Jdis100','Jdis105','Jdis110','Jdis150','Jdis200']
+# Jdis = ['Jdis000']
 N = 1000
 
 for i in range(len(Ls)):
     L = Ls[i]
     dfstr = pd.DataFrame(columns = ['Dimerization', 'O^z'])
-    """if(L == 64):
-        N = 1000
-    elif(L != 64):
-        N = datanum"""
-    for m in range(len(chis)):
-        M = chis[m]
+
+    for m in range(len(Ms)):
+        M = Ms[m]
         for j in range(len(Jdis)):
             jdis = Jdis[j]
             J = float(Jdis[j][4] + '.' + Jdis[j][5] + Jdis[j][6])
@@ -85,20 +83,23 @@ for i in range(len(Ls)):
             elif(j != 0):
                 N = 1000 # plot for both nonrandom and random
 
-            myfile = '/home/liusf/tSDRG_DataAnalysis/Sorting_data/Spin1/metadata/ZL/'+ jdis + '/Dimer-ZL/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m' + str(M) + '_dim-zl_AV'+ str(N) +'.csv'
+            myfile = '/home/liusf/tSDRG_DataAnalysis/Sorting_data/Spin'+ str(spin) +'/metadata/ZL/'+ jdis + '/Dimer-ZL/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m' + str(M) + '_dim-zl_AV'+ str(N) +'.csv'
             df = pd.read_csv(myfile)
 
-            plt.plot(df['Dimerization'], df['ZL'], '-o', color=carr[i+j], markersize = 2, label = 'L=%d, R=%.2f, $\chi$= %d, AVG=%d' %(L, J, M, N))
-            plt.errorbar(df['Dimerization'], df['ZL'], color=carr[i+j], yerr=df['error'], linestyle='None', capsize=3, capthick=1, label=None)
+            # plt.plot(df['Dimerization'], df['ZL'], '-o', color=carr[i+j+m], markersize = 2, label = 'L=%d, R=%.2f, AVG=%d' %(L, J, N))
+            plt.plot(df['Dimerization'], df['ZL'], '-o', color=carr[i+j+m], markersize = 2, label = 'L=%d, R=%.2f, AVG=%d, $\chi$=%d' %(L, J, N, M))
+            # plt.errorbar(df['Dimerization'], df['ZL'], color=carr[i+j+m], yerr=df['error'], linestyle='None', capsize=3, capthick=1, label=None)
 
 plt.xlabel(r'$Dimerization$', fontsize=12)
 plt.ylabel(r'$Z(L)$', fontsize=12)
-plt.xlim(0.05,0.3)
-plt.ylim(-0.2,0.2)
-#plt.xscale('log')
-#plt.yscale('log')
-plt.title('spin = %s, $\chi$ = %d' % (spin, M), fontsize=12)
+# plt.xlim(0.05,0.3)
+# plt.ylim(-0.2,0.2)
+# plt.xscale('log')
+# plt.yscale('log')
+# plt.title('spin = %s, $\chi$ = %d' % (spin, M), fontsize=12)
+plt.title('spin = %s' % (spin), fontsize=12)
 plt.legend(loc = 'best',fontsize=8)
 plt.grid(linestyle='-', linewidth=1)
-plt.savefig( 'Spin1_'+ BC +'_P'+ str(P) +'_m'+ str(M) +'_ZL-Dimerization.pdf', format='pdf', dpi=4000)
+plt.savefig( 'Spin'+ str(spin) +'_'+ BC +'_P'+ str(P) +'_m'+ str(M) +'_ZL-Dimerization.pdf', format='pdf', dpi=4000)
+# plt.savefig( 'Spin'+ str(spin) +'_Chi_ZL-Dimerization.pdf', format='pdf', dpi=4000)
 plt.show()

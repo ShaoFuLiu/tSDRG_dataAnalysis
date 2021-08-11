@@ -1,4 +1,4 @@
-# Dimerization & String Order Parameter
+# Jdis & twist Order Parameter
 ### Plot
 import os
 import math
@@ -14,6 +14,8 @@ cnames = {
 'burlywood':            '#DEB887',
 'cadetblue':            '#5F9EA0',
 'chocolate':            '#D2691E',
+'crimson':              '#DC143C',
+'cyan':                 '#00FFFF',
 'darkblue':             '#00008B',
 'darkcyan':             '#008B8B',
 'darkgoldenrod':        '#B8860B',
@@ -52,34 +54,6 @@ cnames = {
 'indigo':               '#4B0082',
 'ivory':                '#FFFFF0',
 'khaki':                '#F0E68C',
-'lavender':             '#E6E6FA',
-'lavenderblush':        '#FFF0F5',
-'lawngreen':            '#7CFC00',
-'lemonchiffon':         '#FFFACD',
-'lime':                 '#00FF00',
-'limegreen':            '#32CD32',
-'linen':                '#FAF0E6',
-'magenta':              '#FF00FF',
-'maroon':               '#800000',
-'mediumaquamarine':     '#66CDAA',
-'mediumblue':           '#0000CD',
-'mediumorchid':         '#BA55D3',
-'mediumpurple':         '#9370DB',
-'mediumseagreen':       '#3CB371',
-'mediumslateblue':      '#7B68EE',
-'mediumspringgreen':    '#00FA9A',
-'mediumturquoise':      '#48D1CC',
-'mediumvioletred':      '#C71585',
-'midnightblue':         '#191970',
-'mintcream':            '#F5FFFA',
-'mistyrose':            '#FFE4E1',
-'moccasin':             '#FFE4B5',
-'navajowhite':          '#FFDEAD',
-'navy':                 '#000080',
-'oldlace':              '#FDF5E6',
-'olive':                '#808000',
-'olivedrab':            '#6B8E23',
-'orange':               '#FFA500',
 'orangered':            '#FF4500',
 'orchid':               '#DA70D6'}
 carr = []
@@ -90,11 +64,10 @@ spin = int(2)
 BC = 'PBC'
 P = 10
 M = 40
-Ls = [16,32,48,64,96,128,256]
-#Jdis = ['Jdis050','Jdis100','Jdis150','Jdis200','Jdis250','Jdis300','Jdis350','Jdis400','Jdis450']
-Dimer = ["Dim000"]
-Ns = [2000,2000,2000,2000,1000,1000,500]
-init_seed = 1
+Ls = [16,32,48,64]
+# Dimer = ["Dim000","Dim010","Dim020","Dim030","Dim040","Dim050","Dim060","Dim070"]
+Dimer = ["Dim025"]
+Ns = [1000,1000,1000,1000]
 
 for l in range(len(Ls)):
     L = Ls[l]
@@ -105,19 +78,20 @@ for l in range(len(Ls)):
         D = float(Dimer[d][3] + '.' + Dimer[d][4])
         myfile = '/home/liusf/tSDRG_DataAnalysis/Sorting_data/Spin'+ str(spin) +'/metadata/ZL/'+ dimer + '/Jdis-ZL/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m' + str(M) + '_jdis-zl_AV'+ str(N) +'.csv'
         df = pd.read_csv(myfile)
-        plt.plot(df['Jdis'], df['ZL'], "o-", color=carr[l+d], markersize = 2, label = 'L=%d, AVG(%d)' %(L, N))
+        plt.plot(df['Jdis'], df['ZL'], "o-", color=carr[l+d], markersize = 2, label = 'L=%d, D=%.2f, AVG(%d)' %(L, D, N))
         if (N != 1):
             plt.errorbar(df['Jdis'], df['ZL'], yerr=df['error'], linestyle='None', capsize=3, capthick=1, color=carr[l+d], label=None)
 
 plt.xlabel(r'$R$', fontsize=12)
 plt.ylabel(r'$Z(L)$', fontsize=12)
 #plt.xlim(0.6,1)
-#plt.ylim(0.15, 0.2)
+plt.ylim(-0.2, 0.3)
 #plt.xscale('log')
 #plt.yscale('log')
-plt.title('spin = %s, $\dimer$ = %s, $\chi$ = 40' % (spin, D), fontsize=12)
-plt.legend(loc = 'best',fontsize=12)
+# plt.title('spin = %s, $\dimerization$ = %s, $\chi$ = %d' % (spin, D, M), fontsize=12)
+plt.title('spin = %s, $\chi$ = %d' % (spin, M), fontsize=12)
+plt.legend(loc = 'best',fontsize=8)
 plt.grid(linestyle='-', linewidth=1)
-#plt.savefig( 'Spin'+ str(spin) +'_' + BC +'_'+ dimer +'_P'+ str(P) +'_m40_ZL-Jdis.pdf', format='pdf', dpi=4000)
-plt.savefig( 'Spin'+ str(spin) +'_' + BC + '_P'+ str(P) +'_ZL-Jdis.pdf', format='pdf', dpi=4000)
+plt.savefig( dimer + '_Spin'+ str(spin) +'_' + BC + '_P'+ str(P) +'_m'+ str(M) +'_ZL-Jdis.pdf', format='pdf', dpi=4000)
+# plt.savefig('Spin'+ str(spin) +'_' + BC + '_P'+ str(P) +'_m'+ str(M) +'_ZL-Jdis.pdf', format='pdf', dpi=4000)
 plt.show()

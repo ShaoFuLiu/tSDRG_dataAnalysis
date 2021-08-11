@@ -61,6 +61,7 @@ carr = []
 for cmap in cnames.keys():
     carr.append(cmap)
 
+
 spin = int(1)
 BC = 'PBC'
 P = 10
@@ -95,6 +96,6 @@ plt.ylabel(r'$O^z(r=L/2)$', fontsize=12)
 plt.grid(linestyle='-', linewidth=1)
 plt.title('spin = %s, $\chi$ = %d' % (spin, M), fontsize=12)
 plt.legend(loc = 'best',fontsize=6)
-plt.savefig( dimer + '_Spin'+ str(spin) +'_' + BC + '_P'+ str(P) +'_m'+ str(M) +'_Oz-Jdis.pdf', format='pdf', dpi=4000)
-# plt.savefig('Spin'+ str(spin) +'_' + BC + '_P'+ str(P) +'_m'+ str(M) +'_Oz-Jdis.pdf', format='pdf', dpi=4000)
+# plt.savefig( dimer + '_Spin'+ str(spin) +'_' + BC + '_P'+ str(P) +'_m'+ str(M) +'_Oz-Jdis.pdf', format='pdf', dpi=4000)
+plt.savefig('Spin'+ str(spin) +'_' + BC + '_P'+ str(P) +'_m'+ str(M) +'_Oz-Jdis.pdf', format='pdf', dpi=4000)
 plt.show()

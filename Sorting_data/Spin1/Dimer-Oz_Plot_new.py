@@ -63,23 +63,25 @@ for cmap in cnames.keys():
 spin = int(1)
 BC = 'PBC'
 P = 10
-Ls = [64]
-Jdis = ['Jdis030','Jdis060','Jdis090','Jdis120','Jdis150','Jdis180']
-N = 1100
+Ls = [32,64,128,256]
+# Jdis = ['Jdis030','Jdis060','Jdis090','Jdis120','Jdis150','Jdis180']
+Jdis = ['Jdis01','Jdis05','Jdis10']
+Ns = [10000, 1000, 1000, 100]
 M = 30
 
 for i in range(len(Ls)):
     L = Ls[i]
+    N = Ns[i]
     dfstr = pd.DataFrame(columns = ['Dimerization', 'O^z'])
 
     for j in range(len(Jdis)):
         jdis = Jdis[j]
         J = float(Jdis[j][4] + '.' + Jdis[j][5])
 
-        myfile = '/home/liusf/tSDRG_DataAnalysis/Sorting_data/Spin1/metadata/SOP/'+ jdis + '/Dimer-Oz/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m30_dim-sop_AV'+ str(N) +'.csv'
+        myfile = '/home/liusf/tSDRG_DataAnalysis/Sorting_data/Spin'+ str(spin) +'/metadata/SOP/'+ jdis + '/Dimer-Oz/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m'+ str(M) +'_dim-sop_AV'+ str(N) +'.csv'
         df = pd.read_csv(myfile)
 
-        plt.plot(df['Dimerization'] ,df['O^z'], color=carr[i+j], markersize = 2, label = 'L=%d, $\delta$ = %s, AVG(%d)' %(L, J, N-100))
+        plt.plot(df['Dimerization'] ,df['O^z'], color=carr[i+j], markersize = 2, label = 'L=%d, R=%.2f, AVG(%d)' %(L, J, N))
         plt.errorbar(df['Dimerization'], df['O^z'], color=carr[i+j], yerr=df['error'], linestyle='None', capsize=3, capthick=1, label=None)
 
 
@@ -92,5 +94,5 @@ plt.ylabel(r'$O^z(r=L/2)$', fontsize=12)
 plt.title('spin = %s, $\chi$ = %s' % (spin, M), fontsize=12)
 plt.legend(loc = 'best',fontsize=8)
 plt.grid(linestyle='-', linewidth=1)
-plt.savefig( 'Spin1_'+ BC + '_P'+ str(P) +'_m30_Oz-Dimerization.pdf', format='pdf', dpi=4000)
+plt.savefig( 'Spin'+ str(spin) +'_'+ BC + '_P'+ str(P) +'_m'+ str(M) +'_Oz-Dimerization.pdf', format='pdf', dpi=4000)
 plt.show()

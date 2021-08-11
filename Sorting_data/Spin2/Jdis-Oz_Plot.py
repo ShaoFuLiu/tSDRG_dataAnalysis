@@ -1,4 +1,4 @@
-# Dimerization & String Order Parameter
+# Jdis & String Order Parameter
 ### Plot
 import os
 import math
@@ -65,11 +65,11 @@ spin = int(2)
 BC = 'PBC'
 P = 10
 M = 40
-Ls = [32,48,64,96,128,256]
-# Jdis = ['Jdis090','Jdis095','Jdis100','Jdis105','J1is110','Jdis115','Jdis120']
-Dimer = ["Dim000"]
-Ns = [1000,1000,1000,1000,1000,500]
-init_seed = 1
+# Ls = [32,48,64]
+Ls = [32]
+Dimer = ["Dim000","Dim010","Dim020","Dim030","Dim040","Dim050","Dim060","Dim070"]
+# Dimer = ["Dim070"]
+Ns = [1000,1000,1000]
 
 for l in range(len(Ls)):
     L = Ls[l]
@@ -77,22 +77,23 @@ for l in range(len(Ls)):
 
     for d in range(len(Dimer)):
         dimer = Dimer[d]
-        D = float(Dimer[d][3] + '.' + Dimer[d][4])
+        D = float(Dimer[d][3] + '.' + Dimer[d][4] + Dimer[d][5])
 
         myfile = '/home/liusf/tSDRG_DataAnalysis/Sorting_data/Spin'+ str(spin) +'/metadata/SOP/'+ dimer + '/Jdis-Oz/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m'+ str(M) +'_jdis-sop_AV'+ str(N) +'.csv'
         df = pd.read_csv(myfile)
-        plt.plot(df['Jdis'], df['O^z'], "o-", color=carr[l+d], markersize = 2, label = 'L=%d, AVG(%d)' %(L, N))
+        plt.plot(df['Jdis'], df['O^z'], "o-", color=carr[l+d], markersize = 2, label = 'L=%d, D=%.2f, AVG(%d)' %(L, D, N))
         if (N != 1):
             plt.errorbar(df['Jdis'], df['O^z'], yerr=df['error'], linestyle='None', capsize=3, capthick=1, color=carr[l+d], label=None)
 
 plt.xlabel(r'$R$', fontsize=12)
 plt.ylabel(r'$O^z(r=L/2)$', fontsize=12)
-#plt.xlim(0.9,1.2)
-plt.ylim(0.1, -0.3)
+# plt.xlim(0.9,1.2)
+plt.ylim(-0.35, 0)
 #plt.xscale('log')
 #plt.yscale('log')
 plt.grid(linestyle='-', linewidth=1)
-plt.title('spin = %s, $\dimer$ = %s, $\chi$ = %d' % (spin, D, M), fontsize=12)
+plt.title('spin = %s, $\chi$ = %d' % (spin, M), fontsize=12)
 plt.legend(loc = 'best',fontsize=8)
-plt.savefig( 'Spin'+ str(spin) +'_' + BC + '_P'+ str(P) +'_Oz-Jdis.pdf', format='pdf', dpi=4000)
+# plt.savefig( dimer + '_Spin'+ str(spin) +'_' + BC + '_P'+ str(P) +'_m'+ str(M) +'_Oz-Jdis.pdf', format='pdf', dpi=4000)
+plt.savefig('L'+ str(L) +'_Spin'+ str(spin) +'_' + BC + '_P'+ str(P) +'_m'+ str(M) +'_Oz-Jdis.pdf', format='pdf', dpi=4000)
 plt.show()

@@ -64,26 +64,26 @@ for cmap in cnames.keys():
 spin = int(1)
 BC = 'PBC'
 P = 10
-M = 30
-# Ls = [16,32,48,64]
-# Dimer = ["Dim030"]
-# Ns = [1000,1000,1000]
-Ls = [16]
-Dimer = ["Dim005","Dim010","Dim015","Dim020","Dim025","Dim030"]
-Ns = [1000]
+Ms = [40]
+Ls = [16,32,48,64,96,128,256]
+# Dimer = ["Dim005","Dim010","Dim015","Dim020","Dim025","Dim030"]
+Dimer = ['Dim000']
+Ns = [5000,5000,5000,5000,1000,1000,500]
+
 for l in range(len(Ls)):
     L = Ls[l]
     N = Ns[l]
+    for m in range(len(Ms)):
+        M = Ms[m]
+        for d in range(len(Dimer)):
+            dimer = Dimer[d]
+            D = float(Dimer[d][3] + '.' + Dimer[d][4] + Dimer[d][5])
 
-    for d in range(len(Dimer)):
-        dimer = Dimer[d]
-        D = float(Dimer[d][3] + '.' + Dimer[d][4] + Dimer[d][5])
-
-        myfile = '/home/liusf/tSDRG_DataAnalysis/Sorting_data/Spin'+ str(spin) +'/metadata/ZL/'+ dimer + '/Jdis-ZL/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m'+ str(M) +'_jdis-zl_AV'+ str(N) +'.csv'
-        df = pd.read_csv(myfile)
-        plt.plot(df['Jdis'], df['ZL'], "o-", color=carr[l+d], markersize = 2, label = 'L=%d, D=%.2f, AVG(%d)' %(L, D, N))
-        if (N != 1):
-            plt.errorbar(df['Jdis'], df['ZL'], yerr=df['error'], linestyle='None', capsize=3, capthick=1, color=carr[l+d], label=None)
+            myfile = '/home/liusf/tSDRG_DataAnalysis/Sorting_data/Spin'+ str(spin) +'/metadata/ZL/'+ dimer + '/Jdis-ZL/'+ BC +'_L'+ str(L) +'_P' + str(P) + '_m'+ str(M) +'_jdis-zl_AV'+ str(N) +'.csv'
+            df = pd.read_csv(myfile)
+            plt.plot(df['Jdis'], df['ZL'], "o-", color=carr[l+d+m], markersize = 2, label = 'L=%d, D=%.2f, AVG(%d)' %(L, D, N))
+            if (N != 1):
+                plt.errorbar(df['Jdis'], df['ZL'], yerr=df['error'], linestyle='None', capsize=3, capthick=1, color=carr[l+d+m], label=None)
 
 plt.xlabel(r'$R$', fontsize=12)
 plt.ylabel(r'$Z(L)$', fontsize=12)
@@ -95,6 +95,6 @@ plt.grid(linestyle='-', linewidth=1)
 # plt.title('spin = %s, $\dimerization$ = %s, $\chi$ = %d' % (spin, D, M), fontsize=12)
 plt.title('spin = %s, $\chi$ = %d' % (spin, M), fontsize=12)
 plt.legend(loc = 'best',fontsize=8)
-# plt.savefig( 'Spin'+ str(spin) +'_' + BC + '_P'+ str(P) +'_m'+ str(M) +'_ZL-Jdis.pdf', format='pdf', dpi=4000)
-plt.savefig( dimer +'_Spin'+ str(spin) +'_' + BC + '_P'+ str(P) +'_m'+ str(M) +'_ZL-Jdis.pdf', format='pdf', dpi=4000)
+plt.savefig( 'Spin'+ str(spin) +'_' + BC + '_P'+ str(P) +'_m'+ str(M) +'_ZL-Jdis.pdf', format='pdf', dpi=4000)
+# plt.savefig( dimer +'_Spin'+ str(spin) +'_' + BC + '_P'+ str(P) +'_m'+ str(M) +'_ZL-Jdis.pdf', format='pdf', dpi=4000)
 plt.show()
