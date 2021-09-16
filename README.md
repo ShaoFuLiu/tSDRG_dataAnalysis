@@ -1,2 +1,2 @@
 # tSDRG_DataAnalysis
-用來作圖
+此repo儲存metada跟用來作圖
